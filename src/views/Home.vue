@@ -1,37 +1,63 @@
 <template>
   <div>
-    <Message :isShow='message.isShow' :isError='message.isError' :message='message.text'/>
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
+      <!-- loading表示用 -->
+      <div class="ui active inverted page dimmer" v-if="isCallingApi">
+        <div class="ui text loader">Loading</div>
+      </div>
+
+      <!-- エラーメッセージ用-->
+      <p class="ui negative message" v-if="errorMsg">
+        <i class="close icon" @click="clearMsg('error')"></i>
+        <span class="header">エラーが発生しました！</span>
+        {{ errorMsg }}
+      </p>
+
+      <!-- 成功メッセージ用-->
+      <p class="ui positive message" v-if="successMsg">
+        <i class="close icon" @click="clearMsg"></i>
+        <span class="header">成功！</span>
+        {{ successMsg }}
+      </p>
+
+      <!-- 投稿一覧 -->
       <div class="ui segment">
+        <ul class="ui comments divided article-list">
+          <template v-for="(article, index) in articles" :key="index">
+            <li class="comment">
+              
+              <div class="content">
+              <div>
+                <span class="author">{{ article.userId }}</span>
+                
+                <div class="metadata">
+                  <span class="date">{{
+                    convertToLocaleString(article.timestamp)
+                  }}</span>
+                </div>
+                
+                <p class="text">{{ article.text }}</p>
+              </div>
+                
+                <div class="two-button">
+                <button>
+                  <i class="large comment icon"></i>
+                </button>
+                <button type="submit">
+                  <i class="large heart icon"></i>
+                </button>
+                </div>
+                
+                <div class="ui divider"></div>
+                
+                
+              </div>
+            </li>
+          </template>
+        </ul>
       </div>
     </div>
-  </div>
-  <!--投稿一覧-->
-  <h3 clss="ui dividing header">投稿一覧</h3>
-  <div class="ui segment">
-    <ul class="ui components divided article-list">
-      <template v-for="(article, index) in articles" :key = "index">
-        <li class="comment">
-          <div class="content">
-            <span class="author">{{ article.userId }}</span>
-            <div>
-              <span class="data">{{ article.text }}</span>
-            </div>
-            <div class="metadata">
-              <span class="data">{{ convertToLocaleString(article.timestamp) }}</span>
-            </div>
-            <button
-                  v-if="isMyArticle(article.userId)"
-                  class="ui negative mini button right floated"
-                  @click="deleteArticle(article)"
-                >
-                  削除
-                </button>
-          </div>
-        </li>
-      </template>
-    </ul>
   </div>
 </template>
 
@@ -39,16 +65,15 @@
 // 必要なものはここでインポートする
 // @は/srcと同じ意味です
 // import something from '@/components/something.vue';
-import Message from '@/components/Message.vue'
-import { baseUrl } from '@/assets/config.js';
-const headers = {'Authorization' : 'mtiToken'};
+import { baseUrl } from "@/assets/config.js";
+
+const headers = { Authorization: "mtiToken" };
 
 export default {
-  name: 'Home',
+  name: "Home",
 
   components: {
     // 読み込んだコンポーネント名をここに記述する
-    Message
   },
 
   data() {
@@ -66,26 +91,33 @@ export default {
       },
       articles: [],
       iam: null,
-      message: {
-        isShow: false,
-        isError: true,
-        text: ''
-      }
+      successMsg: "",
+      errorMsg: "",
+      isCallingApi: false,
     };
   },
+
   computed: {
-  // 計算した結果を変数として利用したいときはここに記述する
+    // 計算した結果を変数として利用したいときはここに記述する
+    isPostButtonDisabled() {
+      return !this.post.text;
+    },
+
+    isSearchButtonDisabled() {
+      return !this.search.userId;
+    },
   },
 
-  created: async function() {
+  created: async function () {
     // Vue.jsの読み込みが完了したときに実行する処理はここに記述する
     // apiからarticleを取得する
+
     if (
       window.localStorage.getItem("userId") &&
       window.localStorage.getItem("token")
     ) {
       this.iam = window.localStorage.getItem("userId");
-      await this.getSearchedArticles();
+      await this.getArticles();
     } else {
       window.localStorage.clear();
       this.$router.push({ name: "Login" });
@@ -94,42 +126,24 @@ export default {
 
   methods: {
     // Vue.jsで使う関数はここで記述する
+    clearMsg(target) {
+      if (target === "error") {
+        this.errorMsg = "";
+      } else {
+        this.successMsg = "";
+      }
+    },
+
     isMyArticle(id) {
-      if(window.localStorage.getItem("userId") == id){
-        return true;
-      }else{
-        return false;
-      }
-    }, // 自分の記事かどうかを判定する
-    // async getArticles() {}, // 記事一覧を取得する
-    async getSearchedArticles() {
-      if (this.isCallingApi) {
-        return;
-      }
+      return this.iam === id;
+    },
+
+    async getArticles() {
       this.isCallingApi = true;
 
-      const { userId, category, start, end } = this.search;
-      const startTS = start ? new Date(start).getTime() : null;
-      const endTS = end ? new Date(end).getTime() : null;
-      const params = [];
-      if (userId) {
-        params.push(`userId=${userId}`);
-      }
-      if (category) {
-        params.push(`category=${category}`);
-      }
-      if (startTS !== null) {
-        params.push(`start=${startTS}`);
-      }
-      if (endTS !== null) {
-        params.push(`end=${endTS}`);
-      }
-      
-      const qs = params.length > 0 ? params.join("&") : "";
-    
       try {
         /* global fetch */
-        const res = await fetch(baseUrl + `/articles?${qs}`, {
+        const res = await fetch(baseUrl + "/articles", {
           method: "GET",
           headers,
         });
@@ -139,70 +153,113 @@ export default {
 
         // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
         if (!res.ok) {
-          throw new Error(jsonData.message ?? "エラーメッセージがありません");
+          const errorMessage =
+            jsonData.message ?? "エラーメッセージがありません";
+          throw new Error(errorMessage);
         }
 
-        this.articles = jsonData.articles;
+        // 記事がなかった場合undefinedとなり、記事追加時のunshiftでエラーとなるため、空のarrayを代入
+        this.articles = jsonData.articles ?? [];
       } catch (e) {
-        this.isError = true
-        this.text = e.message
-        this.isShow = true
+        this.errorMsg = `記事一覧取得時にエラーが発生しました: ${e}`;
       } finally {
         this.isCallingApi = false;
       }
     },
-    
-    // async postArticle() {}, // 記事を作成する
-    // async getSearchedArticles() {}, // 記事を検索する
-    async deleteArticle(article) {
+
+    async postArticle() {
       if (this.isCallingApi) {
         return;
       }
       this.isCallingApi = true;
 
-      const { userId, timestamp } = article;
+      const reqBody = {
+        userId: this.iam,
+        text: this.post.text,
+        category: this.post.category,
+      };
       try {
         /* global fetch */
-        const res = await fetch(
-          `${baseUrl}/article?userId=${userId}&timestamp=${timestamp}`,
-          {
-            method: "DELETE",
-            headers,
-          }
-        );
+        const res = await fetch(baseUrl + "/article", {
+          method: "POST",
+          body: JSON.stringify(reqBody),
+          headers,
+        });
 
         const text = await res.text();
         const jsonData = text ? JSON.parse(text) : {};
 
         // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
         if (!res.ok) {
-          throw new Error(jsonData.message ?? "エラーメッセージがありません");
+          const errorMessage =
+            jsonData.message ?? "エラーメッセージがありません";
+          throw new Error(errorMessage);
         }
 
-        const deleted = this.articles.findIndex(
-          (a) => a.userId === userId && a.timestamp === timestamp
-        );
-        this.articles.splice(deleted, 1);
-        
-        this.isError = false
-        this.text = "記事が削除されました！";
-        this.isShow = true
+        this.articles.unshift({ ...reqBody, timestamp: Date.now() });
+        this.successMsg = "記事が投稿されました！";
+        this.post.text = "";
+        this.post.category = "";
       } catch (e) {
-        this.isError = true
-        this.text = e.message
+        console.error(e);
+        this.errorMsg = e;
       } finally {
         this.isCallingApi = false;
-        this.isShow = true
       }
     },
-    // convertToLocaleString(timestamp) {} // timestampをLocaleDateStringに変換する
+
+
     convertToLocaleString(timestamp) {
-      const localeData = (new Date(timestamp)).toLocaleString('ja-JP')
-      return localeData
+      return new Date(timestamp).toLocaleString();
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
+/* このコンポーネントだけに適用するCSSはここに記述する */
+html {
+    height: auto;
+}
+
+.ui.segment {
+ margin-bottom: 0 20px 30px 20px; 
+}
+
+.content {
+  margin: 0 20px 30px 20px;
+}
+
+.article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.right-align {
+  text-align: rignt;
+}
+
+.ui.divider {
+  margin: 0;
+}
+
+.two-button {
+  dispay: flex;
+  margin: 10px;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #FFB7C8;
+  border: none;
+  margin: 0 20px 0 20px;
+}
+
+i {
+  color:#fff;
+  padding:0;
+}
+
 </style>
