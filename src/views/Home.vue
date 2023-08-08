@@ -35,11 +35,24 @@
                 {{ post.context }}
               </div>
             </div>
+            <template v-for="(pPost, index) in post.pPosts" :key="index">
+              <div class="content post-comment">
+                <div class="header">
+                  {{ pPost.nickname }}
+                </div>
+                <div class="meta">
+                  {{ convertToLocaleString(pPost.createdAt) }}
+                </div>
+                <div class="description">
+                  {{ pPost.context }}
+                </div>
+              </div>
+            </template>
             <div class="extra content">
               <span class="right floated">
                 <i class="heart outline like icon"></i>
               </span>
-              <router-link :to="'/post/' + post.postId">
+              <router-link :to="'/post/' + post.postId" class="link">
                 <i class="comment icon"></i>
               </router-link>
             </div>
@@ -118,7 +131,6 @@ export default {
         }
 
         this.posts = resJson.posts ?? [];
-        
       } catch (e) {
         this.errorMsg = `記事一覧取得時にエラーが発生しました: ${e}`;
       } finally {
@@ -137,5 +149,11 @@ export default {
 .card {
   width: 100%;
   border-radius: 15px;
+}
+.post-comment {
+  margin-left: 2em;
+}
+.link {
+  text-decoration: none;
 }
 </style>
