@@ -11,10 +11,22 @@
         
     </div>
 
+    <template v-for="(item, index) in this.post" :key="index">
+      <li class="column">
+      <div class="ui card fluid">
+        <div class="content">
+          <h2 class="header">
+            {{item.texts}}
+          </h2>
+        </div>
+      </div>
+    </li>
+    </template>
+
     <form class="form-chat">
-        <input class="text">
+        <input class="text" v-model="post.context">
         <div class="send">
-            <i class="paper plane icon"></i>
+            <i class="paper plane icon" @click="postMessage"></i>
         </div>
     </form>
 </template>
@@ -37,9 +49,11 @@ export default {
   data() {
     // Vue.jsで使う変数はここに記述する
     return {
+      texts: [],
       post: {
-      text: null,
-      category: null,
+      // userId: null,
+      userId: window.localStorage.getItem('userId'),
+      context: null,
     },
       // search: {
       //   userId: null,
@@ -57,33 +71,96 @@ export default {
 
   created: async function() {
     // Vue.jsの読み込みが完了したときに実行する処理はここに記述する
+    // 記事を作成する
+      const headers = { 'Authorization': 'mtiToken' }
+        console.log("ゲット")
+        
+        try {
+        /* global fetch */
+        /* global baseUrl */
+          const res = await fetch(baseUrl + '/message',
+          {
+            method: 'GET',
+            headers
+          });
+          
+          const text = await res.text();
+          const jsonData = text ? JSON.parse(text) : {};
+          
+          if(!res.ok){
+            const errorMessage = jsonData.message ?? 'エラーメッセージなし';
+            throw new Error(errorMessage);
+          }
+
+          // window.localStorage.setItem('token', jsonData.token);
+          // window.localStorage.setItem('userId', this.user.userId);
+          
+          // this.$router.push({name :'Home'});
+          this.texts = jsonData.texts ?? [];
+          // console.log(jsonData);
+        }catch(e){
+          
+        }
     // apiからarticleを取得する
     // this.$router.push({ name: 'Login' })
     // this.$router.push({ name: 'Profile' })
-    this.$router.push({ name: 'Chat' })
+    // this.$router.push({ name: 'Chat' })
   },
 
   methods: {
   //   // Vue.jsで使う関数はここで記述する
   //   // isMyArticle(id) {}, // 自分の記事かどうかを判定する
   //   // async getArticles() {}, // 記事一覧を取得する
-    async postArticle() {
+    // async getSearchedArticles() {}, // 記事を検索する
+    // async deleteArticle(article) {}, // 記事を削除する
+    // convertToLocaleString(timestamp) {} // timestampをLocaleDateStringに変換する
+  
+    async getMessage() {
+      const headers = { 'Authorization': 'mtiToken' }
+        console.log("ゲット")
+        
+        try {
+        /* global fetch */
+        /* global baseUrl */
+          const res = await fetch(baseUrl + '/message',
+          {
+            method: 'GET',
+            headers
+          });
+          
+          const text = await res.text();
+          const jsonData = text ? JSON.parse(text) : {};
+          
+          if(!res.ok){
+            const errorMessage = jsonData.message ?? 'エラーメッセージなし';
+            throw new Error(errorMessage);
+          }
+
+          // window.localStorage.setItem('token', jsonData.token);
+          // window.localStorage.setItem('userId', this.user.userId);
+          
+          // this.$router.push({name :'Home'});
+
+          // console.log(jsonData);
+        }catch(e){
+          
+        }
+        
+    }, 
+  
+    async postMessage() {
       const headers = { 'Authorization': 'mtiToken' }
         console.log("クリック")
         
         const reqBody = {
           userId : window.localStorage.userId,
-          text : this.post.text,
-        }
-        
-        if (this.post.category) {
-          reqBody.category = this.post.category;
+          context : this.post.context,
         }
         
         try {
         /* global fetch */
         /* global baseUrl */
-          const res = await fetch(baseUrl + '/article',
+          const res = await fetch(baseUrl + '/message',
           {
             method: 'POST',
             body: JSON.stringify(reqBody),
@@ -101,18 +178,15 @@ export default {
           // window.localStorage.setItem('token', jsonData.token);
           // window.localStorage.setItem('userId', this.user.userId);
           
-          this.$router.push({name :'Home'});
+          // this.$router.push({name :'Home'});
 
           console.log(jsonData);
         }catch(e){
           
-        }
-        
-    }, // 記事を作成する
-    // async getSearchedArticles() {}, // 記事を検索する
-    // async deleteArticle(article) {}, // 記事を削除する
-    // convertToLocaleString(timestamp) {} // timestampをLocaleDateStringに変換する
+        } 
+    },
   }
+
 }
 </script>
 <style scoped>
