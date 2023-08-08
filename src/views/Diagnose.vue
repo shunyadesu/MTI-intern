@@ -1,92 +1,92 @@
 <template>
-  <div>
+  <form @submit.prevent="postDiagnose">
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
       <div class="question">
         <p>1, 笑うことができたし、物事のおかしい面もわかった。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">いつもと同様にできた。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">あまりできなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">明らかにできなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">まったくできなかった。</label><br/>
+        <label><input type="radio" name="q1" class="radio" @input="handleInput(1, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q1" class="radio" @input="handleInput(1, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q1" class="radio" @input="handleInput(1, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q1" class="radio" @input="handleInput(1, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>2, 物事を楽しみにして待った。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">いつもと同様にできた。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">あまりできなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">明らかにできなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">ほとんどできなかった。</label><br/>
+        <label><input type="radio" name="q2" class="radio" @input="handleInput(2, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q2" class="radio" @input="handleInput(2, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q2" class="radio" @input="handleInput(2, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q2" class="radio" @input="handleInput(2, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>3, 物事が悪くいった時、自分を不必要に責めた。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、たいていそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">はい、時々そうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、あまり度々ではない。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、そうではなかった。</label><br/>
+        <label><input type="radio" name="q3" class="radio" @input="handleInput(3, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q3" class="radio" @input="handleInput(3, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q3" class="radio" @input="handleInput(3, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q3" class="radio" @input="handleInput(3, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>4, はっきりした理由もないのに不安になったり、心配した。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">いいえ、そうではなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">ほとんどそうではなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">はい、時々あった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">はい、しょっちゅうあった。</label><br/>
+        <label><input type="radio" name="q4" class="radio" @input="handleInput(4, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q4" class="radio" @input="handleInput(4, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q4" class="radio" @input="handleInput(4, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q4" class="radio" @input="handleInput(4, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>5, はっきりした理由もないのに恐怖に襲われた。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、しょっちゅうあった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">はい、時々あった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、めったになかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、まったくなかった。</label><br/>
+        <label><input type="radio" name="q5" class="radio" @input="handleInput(5, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q5" class="radio" @input="handleInput(5, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q5" class="radio" @input="handleInput(5, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q5" class="radio" @input="handleInput(5, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>6, することがたくさんあって大変だった。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、たいてい対処できなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">はい、いつものようにはうまく対処しなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、たいていうまく対処した。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、普段通りに対処した。</label><br/>
+        <label><input type="radio" name="q6" class="radio" @input="handleInput(6, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q6" class="radio" @input="handleInput(6, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q6" class="radio" @input="handleInput(6, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q6" class="radio" @input="handleInput(6, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>7, 不幸せなので、眠りにくかった。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、ほとんどいつもそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">はい、ときどきそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、あまり度々ではなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、まったくなかった。</label><br/>
+        <label><input type="radio" name="q7" class="radio" @input="handleInput(7, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q7" class="radio" @input="handleInput(7, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q7" class="radio" @input="handleInput(7, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q7" class="radio" @input="handleInput(7, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>8, 悲しくなったり、惨めになった。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、たいていそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">はい、かなりしばしばそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、あまり度々ではなかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、まったくそうではなかった。</label><br/>
+        <label><input type="radio" name="q8" class="radio" @input="handleInput(8, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q8" class="radio" @input="handleInput(8, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q8" class="radio" @input="handleInput(8, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q8" class="radio" @input="handleInput(8, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>9, 不幸せなので、泣けてきた。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、たいていそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">はい、かなりしばしばそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">ほんの時々あった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">いいえ、まったくそうではなかった。</label><br/>
+        <label><input type="radio" name="q9" class="radio" @input="handleInput(9, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q9" class="radio" @input="handleInput(9, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q9" class="radio" @input="handleInput(9, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q9" class="radio" @input="handleInput(9, 3)">まったくできなかった。</label><br/>
       </div>
       
       <div class="question">
         <p>10, 自分自身を傷つけるという考えが浮かんできた。</p>
-        <label><input type="radio" name="radio" class="radio" value="チェック１">はい、かなりしばしばそうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック2">時々そうだった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">めったになかった。</label><br/>
-        <label><input type="radio" name="radio" class="radio" value="チェック3">まったくなかった。</label><br/>
+        <label><input type="radio" name="q10" class="radio" @input="handleInput(10, 0)">いつもと同様にできた。</label><br/>
+        <label><input type="radio" name="q10" class="radio" @input="handleInput(10, 1)">あまりできなかった。</label><br/>
+        <label><input type="radio" name="q10" class="radio" @input="handleInput(10, 2)">明らかにできなかった。</label><br/>
+        <label><input type="radio" name="q10" class="radio" @input="handleInput(10, 3)">まったくできなかった。</label><br/>
       </div>
       
     </div>
     <div class="bt">
-    <button type="submit" class="result">結果を見る</button>
+      <button type="submit" class="result">結果を見る</button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -104,6 +104,19 @@ export default {
   data() {
     // Vue.jsで使う変数はここに記述する
     return {
+      userId : window.localStorage.getItem('userId'),
+      questions:{
+        q1 : null,
+        q2 : null,
+        q3 : null,
+        q4 : null,
+        q5 : null,
+        q6 : null,
+        q7 : null,
+        q8 : null,
+        q9 : null,
+        q10 : null
+      }
     };
   },
 
@@ -113,6 +126,53 @@ export default {
 
   methods: {
     // Vue.jsで使う関数はここで記述する
+    handleInput0(question_index, value) {
+      if(question_index == 0){
+        this.q0 = value
+      }else if(question_index == 1){
+        this.q1 = value
+      }else if(question_index == 2){
+        this.q2 = value
+      }else if(question_index == 3){
+        this.q3 = value
+      }else if(question_index == 4){
+        this.q4 = value
+      }else if(question_index == 5){
+        this.q5 = value
+      }else if(question_index == 6){
+        this.q6 = value
+      }else if(question_index == 7){
+        this.q7 = value
+      }else if(question_index == 8){
+        this.q8 = value
+      }else if(question_index == 9){
+        this.q9 = value
+      }else if(question_index == 10){
+        this.q10 = value
+      }
+    },
+    
+    async postDiagnose(){
+      try {
+        const { q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 } = this.questions;
+        const userId = this.userId;
+        const requestBody = { userId, q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 }
+        const res = await fetch(baseUrl + '/epsd', {
+          method: 'POST',
+          body: JSON.stringify(requestBody),
+        })
+        
+        const text = await res.text();
+        const jsonData = text ? JSON.parse(text) : {}
+        
+        if (!res.ok) {
+          throw new Error(jsonData.message ?? 'エラーメッセージがありません')
+        }
+      } catch(e) {
+        this.message.text = e.message ?? 'エラーメッセージがありません';
+      }
+      return
+    },
   },
 }
 </script>
