@@ -38,11 +38,11 @@
         </select>
       </div>
       <div>
-        <input class="textarea" type="textarea">
+        <input class="textarea" type="textarea" v-model="post.context">
       </div>
       <div>
         <label class="label">カテゴリ</label>
-        <select class="select" name="genre">
+        <select class="select" name="genre" v-model="post.genre">
           <option class="option" value="meal">食事</option>
           <option class="option" value="scold">叱り方</option>
           <option class="option" value="sleep">睡眠</option>
@@ -51,7 +51,7 @@
         </select>
       </div>
       <div class="div-send">
-        <input class="send" type="submit" value="送信">
+        <input class="send" type="submit" value="送信" @click="postArticle">
       </div>
     </form>
   </div>
@@ -76,8 +76,10 @@ export default {
     // Vue.jsで使う変数はここに記述する
     return {
       post: {
-      text: null,
-      category: null,
+      userId: window.localStorage.getItem('userId'),
+      nickname: window.localStorage.getItem('nickname'),
+      genre: null,
+      context: null,
     },
       // search: {
       //   userId: null,
@@ -110,18 +112,21 @@ export default {
         console.log("クリック")
         
         const reqBody = {
-          userId : window.localStorage.userId,
-          text : this.post.text,
-        }
-        
-        if (this.post.category) {
-          reqBody.category = this.post.category;
+          userId: this.post.userId,
+          nickname: this.post.nickname,
+          genre: this.post.genre,
+          context: this.post.context,
+          // postId: this.postId,
+          // kind : this.post.kind,
+          // userId : window.localStorage.userId,
+          // text : this.post.text,
+          // category : this.post.category,
         }
         
         try {
         /* global fetch */
         /* global baseUrl */
-          const res = await fetch(baseUrl + '/article',
+          const res = await fetch(baseUrl + `/post?userId=${this.post.userId}&nickname=${this.post.nicknam}`,
           {
             method: 'POST',
             body: JSON.stringify(reqBody),
@@ -139,7 +144,7 @@ export default {
           // window.localStorage.setItem('token', jsonData.token);
           // window.localStorage.setItem('userId', this.user.userId);
           
-          this.$router.push({name :'Home'});
+          // this.$router.push({name :'Home'});
 
           console.log(jsonData);
         }catch(e){
