@@ -2,6 +2,10 @@
   <div>
     <div class="top-page">
       <!-- 基本的なコンテンツはここに記載する -->
+      <div class="button">
+        <input type="button" name="新規登録" value="新規登録"/>
+        <input type="button" name="ログイン" value="ログイン"/>
+      </div>
       <div class = "top-image">
        <img src = "@/assets/img/Toplogo.png">
       </div>
@@ -12,7 +16,7 @@
         </p>
       </div>
       
-      <div clss="main">
+      <div class="main">
         <div class="box">
           <div class="box-left">
             <img src="@/assets/img/oyako.jpg" class="first-img">
@@ -62,7 +66,10 @@ export default {
 <style scoped>
 /* このコンポーネントだけに適用するCSSはここに記述する */
 .top-page {
-  margin: 0,auto;
+  margin: 0,auto
+}
+.button {
+  text-align: right;
 }
 .top-image {
   text-align: center;
@@ -75,29 +82,29 @@ export default {
   text-align: center;
 }
 .main {
-  margin: 0,auto;
+  overflow: auto;
 }
 .first-img {
-  width:70%;
+  width:100%;
 }
 .box {
     position: relative;
-    width: 600px;
-    margin: 0,auto;
-    padding-left: 20px;
-    padding-top: 50px;
-    background: #FFFFFF;
 }   
 .box-left {
+    width: 300px;
+    height: 300px;
+    padding-top: 30px;
     position: absolute;
 }
     
 .box-right {
     position: absolute;
-    top: 210px;
-    right: 50px;
-    width: 300px;
+    top: 150px;
+    left: 110px;
+    width: 350px;
     padding-bottm: 50px;
-    background: rgba(255,187,203,0.26);
+    background-color: rgba(255,187,203,0.5);
+    color: #FFFFFF;
+    padding: 10px 10px 10px 10px;
 }
 </style>
