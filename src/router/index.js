@@ -79,8 +79,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/TopPage',
-      name: 'TopPage',
+      path: '/lp',
+      name: 'Lp',
       component: TopPage,
       meta: {
         title: 'TopPage',

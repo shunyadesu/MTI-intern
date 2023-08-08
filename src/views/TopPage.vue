@@ -95,11 +95,16 @@ export default {
 /* このコンポーネントだけに適用するCSSはここに記述する */
 .button {
   text-align: right;
+  margin: 1em 0;
 }
 .button1 {
+  padding: 0.5em 1em;
   background-color: #FFBBCB;
   color: #FFFFFF;
-   box-shadow: 0 2px 4px #DEDEDE;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5em;
+  border: none;
+  margin: 0 0.5em;
 }
 .button1:hover {
   opacity: 0.5;
@@ -114,9 +119,7 @@ export default {
   color : #ffffff;
   text-align: center;
 }
-/*.main {*/
-/*  overflow: auto;*/
-/*}*/
+
 .first-img {
   width:100%;
 }
