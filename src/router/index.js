@@ -4,6 +4,7 @@ import Login from '../views/templates/Login.vue'
 import Profile from '../views/templates/Profile.vue'
 import User from '../views/templates/User.vue'
 import Post from '../views/Post.vue'
+import TopPage from '../views/TopPage.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,15 @@ const router = createRouter({
       component: Post,
       meta: {
         title: 'Post',
+        isRequiredAuth: true
+      }
+    },
+    {
+      path: '/TopPage',
+      name: 'TopPage',
+      component: TopPage,
+      meta: {
+        title: 'TopPage',
         isRequiredAuth: true
       }
     },
