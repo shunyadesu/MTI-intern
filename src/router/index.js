@@ -39,7 +39,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/profileEdit',
+      path: '/profile/edit',
       name: 'ProfileEdit',
       component: ProfileEdit,
       meta: {

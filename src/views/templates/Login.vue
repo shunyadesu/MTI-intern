@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-wrapper">
     <Loading :isShow='isLoading' />
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
@@ -169,3 +169,11 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.login-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+</style>
