@@ -2,29 +2,61 @@
   <div>
     <div class="top-page">
       <!-- 基本的なコンテンツはここに記載する -->
+      <div class="button">
+        <input type="button" name="新規登録" value="新規登録" class="button1" @click='this.$router.push("/login")'/>
+        <input type="button" name="ログイン" value="ログイン" class="button1" @click='this.$router.push("/login")'/>
+      </div>
       <div class = "top-image">
        <img src = "@/assets/img/Toplogo.png">
       </div>
       <div class = "top-title">
         <p>
           心と体のバランスを大切に。笑顔溢れる未来へ。<br>
-        「ままのいえ」は、産後のママたちが心身の健康をサポートし、<br>幸せな母親としての旅路を歩むためのアプリです。
+        「ままのいえ」は、産後のママたちが心身の健康をサポートし、<br>
+         幸せな母親としての旅路を歩むためのアプリです。
         </p>
       </div>
       
-      <div clss="main">
+      <div class="main">
+
         <div class="box">
-          <div class="box-left">
-            <img src="@/assets/img/oyako.jpg" class="first-img">
-          </div>
-          <div class="box-right"> 
-            <p>このアプリは、産後鬱の予防と心のケアを重視しています。<br>
-              ユーザーは、専門的なアドバイスや情報を受けることができるだけでなく、<br>
-              他のママたちとのコミュニティを通じて経験を共有し、
-              支え合うことができます。<br>
-              アプリは、心地よい環境でリラックスできるコンテンツやツールを提供し、<br>
-              ストレスの軽減やリフレッシュメントに役立ちます。</p>
-          </div>
+            <div class="box-item img left">
+              <img src="@/assets/img/oyako.jpg" class="first-img">
+            </div>
+            <div class="box-item text"> 
+              <p>このアプリは、産後鬱の予防と心のケアを重視しています。
+                ユーザーは、専門的なアドバイスや情報を受けることができるだけでなく、
+                他のママたちとのコミュニティを通じて経験を共有し、
+                支え合うことができます。<br>
+                アプリは、心地よい環境でリラックスできるコンテンツやツールを提供し
+                ストレスの軽減やリフレッシュメントに役立ちます。</p>
+            </div>
+          
+        </div>
+        <div class="box">
+            <div class="box-item img right">
+              <img src="@/assets/img/oyako2.jpg" class="first-img">
+            </div>
+            <div class="box-item text left"> 
+              <p>「ままのいえ」は、新たな段階を迎えるママたちに、<br>
+               育児と自己ケアのバランスを取る手助けを提供します。
+               笑顔と希望に満ちた未来を築くために、<br>
+               心と体の健やかさを大切にする場所として、<br>
+               ユーザーの母親としての旅を支える存在となることを目指しています。</p>
+            </div>
+          
+        </div>
+         <div class="box">
+            <div class="box-item img left">
+              <img src="@/assets/img/oyako3.jpg" class="first-img">
+            </div>
+            <div class="box-item text"> 
+              <p>「ままのいえ」は、新しいママたちにとって心強く、いつでも頼れる、味方となることを目指しています。
+              幸せな母親としてのステップを踏み出す際に、
+              情報、サポート、共感、そして心の健康を提供し、
+              ユーザーの産後の旅路を穏やかで幸福なものにすることを使命としています。</p>
+            </div>
+          
         </div>
       </div>
     </div>
@@ -61,8 +93,16 @@ export default {
 
 <style scoped>
 /* このコンポーネントだけに適用するCSSはここに記述する */
-.top-page {
-  margin: 0,auto;
+.button {
+  text-align: right;
+}
+.button1 {
+  background-color: #FFBBCB;
+  color: #FFFFFF;
+   box-shadow: 0 2px 4px #DEDEDE;
+}
+.button1:hover {
+  opacity: 0.5;
 }
 .top-image {
   text-align: center;
@@ -74,30 +114,48 @@ export default {
   color : #ffffff;
   text-align: center;
 }
-.main {
-  margin: 0,auto;
-}
+/*.main {*/
+/*  overflow: auto;*/
+/*}*/
 .first-img {
-  width:70%;
+  width:100%;
 }
 .box {
     position: relative;
-    width: 600px;
-    margin: 0,auto;
-    padding-left: 20px;
-    padding-top: 50px;
-    background: #FFFFFF;
+    height: 350px;
 }   
-.box-left {
-    position: absolute;
+
+.box {
+  margin: 2em 0;
+  position: relative;
 }
-    
-.box-right {
-    position: absolute;
-    top: 210px;
-    right: 50px;
-    width: 300px;
-    padding-bottm: 50px;
-    background: rgba(255,187,203,0.26);
+.box-item {
+  width: 70%;
+}
+.box-item.img {
+  position: absolute;
+  top: 0;
+}
+.box-item.img.right {
+  right: 0;
+}
+.box-item.img.left {
+  left: 0;
+}
+
+.box-item.text {
+  background-color: #FFBBCB;
+  padding: 1.5em;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.box-item.text.right {
+  right: 0;
+}
+.box-item.text.left {
+  left: 0;
 }
 </style>
