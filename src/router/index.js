@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/templates/Login.vue'
 import Profile from '../views/templates/Profile.vue'
+import ProfileEdit from '../views/templates/ProfileEdit.vue'
 import User from '../views/templates/User.vue'
 import Post from '../views/Post.vue'
 
@@ -31,6 +32,15 @@ const router = createRouter({
       component: Profile,
       meta: {
         title: 'Profile',
+        isRequiredAuth: true
+      }
+    },
+    {
+      path: '/profileEdit',
+      name: 'ProfileEdit',
+      component: ProfileEdit,
+      meta: {
+        title: 'ProfileEdit',
         isRequiredAuth: true
       }
     },

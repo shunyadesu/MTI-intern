@@ -43,18 +43,38 @@
 <!--</template>-->
 
 <template>
-  <div class="profile">
-    <div class="wrapper">
-      <div class="picture"></div>
-      <router-link to="/profile/edit" class="edit">編集</router-link>
-    </div>
-    <div class="text">ニックネーム</div>
-    <div class="text">自己紹介</div>
-    <div class="index">
-      <div class="text">投稿</div>
-      <div class="text">いいね</div>
-    </div>
-  </div>
+    <form class="profile-edit">
+        <div class="picture"></div>
+        <div class="wrapper">
+            <label class="label">ニックネーム</label>
+            <input class="input">
+        </div>
+        <div class="wrapper">
+            <label class="label">自己紹介</label>
+            <input class="textarea" type="textarea">
+        </div>
+        <div class="wrapper">
+            <label class="label">誕生日</label>
+            <input class="input">
+        </div>
+        <div class="wrapper">
+            <label class="select-label">性別</label>
+            <select class="select">
+                <option>男性</option>
+                <option>女性</option>
+                <option>どちらでもない</option>
+            </select>
+        </div>
+        <div class="wrapper">
+            <label class="label">都道府県</label>
+            <input class="input">
+        </div>
+        <div class="button">
+            <button class="complete">
+                完了
+            </button>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -66,7 +86,7 @@ import Message from '@/components/Message.vue'
 import Loading from '@/components/Loading.vue'
 
 export default {
-  name: 'Profile',
+  name: 'ProfileEdit',
   components: {
     // 読み込んだコンポーネント名をここに記述する
     Message,
@@ -179,64 +199,70 @@ export default {
 </script>
 
 <style scoped>
-  .profile{
-    margin-top: 20px;
-    padding: 20px;
-    height: calc(100vh - 110px);
-  }
-  
-  .profile .wrapper{
-    display: flex;
-    justify-content: space-between;
-    padding-left: 70px;
-    margin-bottom: 20px;
-  }
-  
-  .profile .wrapper .picture{
-    background-color: white;
-    border-radius: 100%;
-    width: 20vh;
-    height: 20vh;
-    margin: 0 auto;
-  }
-  
-  .profile .wrapper .edit{
-    background-color: #FFBBCB;
-    width: 70px;
-    height: 30px;
-    border-radius: 10px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .profile .text{
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .profile .index{
-    width: 100%;
-    height: 40%;
-    background-color: white;
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-around;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .profile .index .text{
-    border-bottom: 1px solid lightgrey;
-    height: 30px;
-    width: 50%;
-    font-size: 15px;
-    font-weight: 600;
-    display: flex;
-    align-items:center;
-  }
+    .profile-edit{
+        padding: 20px;
+    }
+    
+    .profile-edit .picture{
+        background-color: white;
+        border-radius: 100%;
+        width: 20vh;
+        height: 20vh;
+        margin: 0 auto;
+    }
+    
+    .profile-edit .wrapper{
+        text-align: right;
+        margin-top: 20px;
+    }
+    
+    .profile-edit .wrapper .label{
+        margin-right: 20px;
+        font-weight: 600;
+    }
+    
+    .profile-edit .wrapper .input{
+        width: 60%;
+        height: 3vh;
+        border-radius: 10px;
+        text-align: right;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .profile-edit .wrapper .textarea{
+        width: 60%;
+        height: 9vh;
+        border-radius: 10px;
+        text-align: right;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .profile-edit .wrapper .select-label{
+        font-weight: 600;
+    }
+    
+    .profile-edit .wrapper .select{
+        width: 59%;
+        height: 3vh;
+        border-radius: 10px;
+        text-align: right;
+        border: none;
+        margin-left: 30px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .profile-edit .button{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .profile-edit .button .complete{
+        margin-top: 20px;
+        width: 20%;
+        color: white;
+        border: 1px solid lightgrey;
+        border-radius: 10px;
+        background-color: #FFBBCB;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
 </style>
