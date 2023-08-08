@@ -9,6 +9,9 @@ import TopPage from '../views/TopPage.vue'
 import Negative from '../views/Negative.vue'
 import Positive from '../views/Positive.vue'
 import Chat from '../views/Chat.vue'
+import Diagnose from '../views/Diagnose.vue'
+import Diagnosehome from '../views/Diagnosehome.vue'
+import Search from '../views/Search.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -101,6 +104,33 @@ const router = createRouter({
         isRequiredAuth: true
       }
     },
+     {
+      path: '/diagnose',
+      name: 'Diagnose',
+      component: Diagnose,
+      meta: {
+        title: 'Diagnose',
+        isRequiredAuth: true
+      }
+    }, 
+    {
+      path: '/diagnosehome',
+      name: 'Diagnosehome',
+      component: Diagnosehome,
+      meta: {
+        title: 'Diagnosehoem',
+        isRequiredAuth: true
+      }
+    }, 
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
+      meta: {
+        title: 'Search',
+        isRequiredAuth: true
+      }
+    },  
   ]
 })
 
