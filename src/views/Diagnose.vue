@@ -90,20 +90,12 @@
 </template>
 
 <script>
-// 必要なものはここでインポートする
-// @は/srcの同じ意味です
-// import something from '@/components/something.vue';
 import { baseUrl } from "@/assets/config.js";
 
 export default {
   name: 'Diagnose',
 
-  components: {
-    // 読み込んだコンポーネント名をここに記述する
-  },
-
   data() {
-    // Vue.jsで使う変数はここに記述する
     return {
       userId : window.localStorage.getItem('userId'),
       questions:{
@@ -121,16 +113,10 @@ export default {
     };
   },
 
-  computed: {
-    // 計算した結果を変数として利用したいときはここに記述する
-  },
-
   methods: {
-    // Vue.jsで使う関数はここで記述する
     async postDiagnose(){
       try {
         /* global fetch */
-        /* global baseUrl */
         const { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 } = this.questions;
         const userId = this.userId;
         const requestBody = { 
@@ -177,7 +163,6 @@ export default {
 </script>
 
 <style scoped>
-/* このコンポーネントだけに適用するCSSはここに記述する */
 .ui.main.container {
     background-color: #fff;
     padding:0 20px 20px 20px;

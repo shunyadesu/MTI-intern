@@ -52,7 +52,7 @@
               <span class="right floated">
                 <i class="heart outline like icon"></i>
               </span>
-              <router-link :to="'/post/' + post.postId" class="link">
+              <router-link :to="'/post/'+post.postId" class="link">
                 <i class="comment icon"></i>
               </router-link>
             </div>
@@ -89,16 +89,7 @@ export default {
   },
 
   created: async function () {
-    if (
-      window.localStorage.getItem("userId") &&
-      window.localStorage.getItem("token")
-    ) {
-      this.iam = window.localStorage.getItem("userId");
-      await this.getPosts();
-    } else {
-      window.localStorage.clear();
-      this.$router.push({ name: "Login" });
-    }
+    await this.getPosts();
   },
 
   methods: {

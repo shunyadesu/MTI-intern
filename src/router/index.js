@@ -147,8 +147,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.isRequiredAuth)) {
     if (
       !window.localStorage.getItem('userId') ||
-      !window.localStorage.getItem('password') ||
-      !window.localStorage.getItem('nickname')
+      !window.localStorage.getItem('password')
     ) {
       next({
         path: '/login'

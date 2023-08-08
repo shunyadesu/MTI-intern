@@ -21,6 +21,7 @@
 
       <!-- 投稿一覧 -->
       <div>
+        <h1>開発中</h1>
         <template v-for="(post, index) in posts" :key="index">
           <div class="ui card">
             <div class="content">
@@ -90,16 +91,7 @@ export default {
   },
 
   created: async function () {
-    if (
-      window.localStorage.getItem("userId") &&
-      window.localStorage.getItem("token")
-    ) {
-      this.iam = window.localStorage.getItem("userId");
-      await this.getPosts();
-    } else {
-      window.localStorage.clear();
-      this.$router.push({ name: "Login" });
-    }
+    await this.getPosts();
   },
 
   methods: {
