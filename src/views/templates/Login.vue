@@ -8,7 +8,7 @@
       <div class="ui segment">
         <form class="ui large form" @submit.prevent="submit">
           <div class="field">
-            <div class="ui left icon input ">
+            <div class="ui left icon input">
               <i class="user icon"></i>
               <input type="text" placeholder="ID" v-model="user.userId">
             </div>
@@ -19,16 +19,16 @@
               <input type="text" placeholder="Password" v-model="user.password">
             </div>
           </div>
+          <div class="field">
+            <div class="ui left icon input " v-if="!isLogin">
+              <i class="envelope outline icon"></i>
+              <input type="text" placeholder="Email" v-model="user.email">
+            </div>
+          </div>
           <div class="field" v-if="!isLogin">
             <div class="ui left icon input ">
               <i class="tag icon"></i>
               <input type="text" placeholder="Nickname" v-model="user.nickname">
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui left icon input " v-if="!isLogin">
-              <i class="calendar icon"></i>
-              <input type="text" placeholder="Age" v-model="user.age">
             </div>
           </div>
           <button type="submit" :disabled='formValid' class="login">
@@ -66,9 +66,9 @@ export default {
       isLoading: false,
       user: {
         userId: null,
+        email: null,
         password: null,
         nickname: null,
-        age: null
       },
       message: {
         isShow: false,
@@ -90,7 +90,7 @@ export default {
       if (this.isLogin) {
         return !(this.user.userId && this.user.password)
       } else {
-        return !(this.user.userId && this.user.password && this.user.nickname && this.user.age)
+        return !(this.user.userId && this.user.password && this.user.nickname && this.user.email)
       }
     }
   },
@@ -101,16 +101,16 @@ export default {
       this.isLogin = !this.isLogin
     },
     async submit() {
-      const { userId, password, nickname, age } = this.user
+      const { userId, password, nickname, email} = this.user
       
       this.isLoading = true
       if (!this.isLogin) {
         // リクエストボディを指定する
-        const requestBody = { userId, password, nickname, age }
+        const requestBody = { userId, password, nickname, email}
   
         try {
           /* global fetch */
-          const res = await fetch(baseUrl + '/user/signup',  {
+          const res = await fetch(baseUrl + '/user',  {
             method: 'POST',
             body: JSON.stringify(requestBody),
           });
