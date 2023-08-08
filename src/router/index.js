@@ -8,6 +8,8 @@ import Post from '../views/Post.vue'
 import TopPage from '../views/TopPage.vue'
 import Negative from '../views/Negative.vue'
 import Positive from '../views/Positive.vue'
+import Diagnose from '../views/Diagnose.vue'
+import Diagnosehome from '../views/Diagnosehome.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -91,6 +93,24 @@ const router = createRouter({
         isRequiredAuth: true
       }
     },
+     {
+      path: '/diagnose',
+      name: 'Diagnose',
+      component: Diagnose,
+      meta: {
+        title: 'Diagnose',
+        isRequiredAuth: true
+      }
+    }, 
+    {
+      path: '/diagnosehome',
+      name: 'Diagnosehome',
+      component: Diagnosehome,
+      meta: {
+        title: 'Diagnosehoem',
+        isRequiredAuth: true
+      }
+    },  
   ]
 })
 
