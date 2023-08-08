@@ -133,35 +133,39 @@ export default {
         }
       }
       
-      // リクエストボディを指定する
-      const requestBody = { userId, password }
+      // ログイン
+      const requestBody = {
+        userId: this.user.userId,
+        password: this.user.password
+      }
       try {
         /* global fetch */
-        const res = await fetch(baseUrl + '/user/login',  {
+        const res = await fetch(`${baseUrl}/login`,  {
           method: 'POST',
           body: JSON.stringify(requestBody),
         });
 
         const text = await res.text();
-        const jsonData = text ? JSON.parse(text) : {}
+        const resJson = text ? JSON.parse(text) : {}
 
-        // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
         if (!res.ok) {
-          throw new Error(
-            jsonData.message ?? 'エラーメッセージがありません'
-          );
+          throw new Error(resJson.message ?? 'エラーメッセージがありません');
         }
         
         // 成功時の処理
-        console.log(jsonData);
-        window.localStorage.setItem('token', jsonData.token)
-        window.localStorage.setItem('userId', this.user.userId)
-        this.$router.push({name: 'Home'})
+        if (resJson.isLogin) {
+          window.localStorage.setItem('userId', this.user.userId)
+          window.localStorage.setItem('password', this.user.password)
+          console.log('ok')
+          this.$router.push('/')
+        } else {
+          throw new Error('ユーザー名またはパスワードが間違っています');
+        }
+        
       } catch (e) {
         // エラー時の処理
         this.message.isShow = true
         this.message.text = e.message ?? 'エラーメッセージがありません';
-        this.isLoading = false
       }
       this.isLoading = false
       return

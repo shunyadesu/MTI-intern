@@ -19,7 +19,18 @@
         {{ successMsg }}
       </p>
 
-      <!-- 投稿一覧 -->
+      
+      <!-- 投稿検索 -->
+      <div class="search-box">
+        <select class='search-select' id="selectedOption" v-model="searchSelect">
+          <option value="userId">ユーザーID</option>
+          <option value="genre">ジャンル</option>
+        </select>
+        <input type="text" name="" class="text" v-model="searchText"/>
+        <button type="submit" @click="searchPosts"><i class="search icon"></i></button>
+      </div>
+
+      <!-- 投稿一覧 -->      
       <div>
         <template v-for="(post, index) in posts" :key="index">
           <div class="ui card">
@@ -32,14 +43,16 @@
                 {{ convertToLocaleString(post.createdAt) }}
               </div>
               <div class="description">
-                {{ post.context }}
+                {{ posts.context }}
               </div>
             </div>
             <div class="extra content">
               <span class="right floated">
                 <i class="heart outline like icon"></i>
               </span>
-              <i class="comment icon"></i>
+              <router-link :to="'/post/'+post.postId" class="link">
+                <i class="comment icon"></i>
+              </router-link>
             </div>
           </div>
         </template>
@@ -49,78 +62,37 @@
 </template>
 
 <script>
-// 必要なものはここでインポートする
-// @は/srcと同じ意味です
-// import something from '@/components/something.vue';
 import { baseUrl } from "@/assets/config.js";
 
 export default {
-  name: "Home",
+  name: "Search",
 
   data() {
-    // Vue.jsで使う変数はここに記述する
     return {
       isLoading: false,
       posts: [],
-      // post: {
-      //   text: null,
-      //   category: null,
-      // },
-      // search: {
-      //   userId: null,
-      //   category: null,
-      //   start: null,
-      //   end: null,
-      // },
-      // iam: null,
       successMsg: "",
       errorMsg: "",
+      searchSelect: 'userId',
+      searchText: ''
     };
   },
 
   computed: {
-    // 計算した結果を変数として利用したいときはここに記述する
     isPostButtonDisabled() {
       return !this.post.text;
     },
-
     isSearchButtonDisabled() {
       return !this.search.userId;
     },
   },
 
-  created: async function () {
-    if (
-      window.localStorage.getItem("userId") &&
-      window.localStorage.getItem("token")
-    ) {
-      this.iam = window.localStorage.getItem("userId");
-      await this.getPosts();
-    } else {
-      window.localStorage.clear();
-      this.$router.push({ name: "Login" });
-    }
-  },
-
   methods: {
-    // Vue.jsで使う関数はここで記述する
-    clearMsg(target) {
-      if (target === "error") {
-        this.errorMsg = "";
-      } else {
-        this.successMsg = "";
-      }
-    },
-
-    isMyArticle(id) {
-      return this.iam === id;
-    },
-
-    async getPosts() {
+    async searchPosts() {
       this.isLoading = true;
       try {
         /* global fetch */
-        const res = await fetch(`${baseUrl}/posts`, {
+        const res = await fetch(`${baseUrl}/posts?${this.searchSelect}=${this.searchText}`, {
           method: "GET",
         });
 
@@ -148,9 +120,39 @@ export default {
 </script>
 
 <style scoped>
-/* このコンポーネントだけに適用するCSSはここに記述する */
 .card {
   width: 100%;
 }
 
+.search-box {
+  display: flex;
+  background-color: #ffffff;
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.search-select {
+  border: none;
+  height: 2.5em;
+  border-radius: 1em;
+  border: solid 1px lightgray;
+}
+
+.text {
+  margin: 0;
+}
+
+button {
+  width: 36px;
+  height: 36px;
+}
+
+.link {
+  text-decoration: none;
+}
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="ui main container">
-      <!-- 基本的なコンテンツはここに記載する -->
     <h3>セルフチェック</h3>
     <p>ご出産おめでとうございます。ご出産から今までのあいだにどのようにお感じになったかをお知らせください。<br />
     今日だけでなく、過去 7 日間にあなたが感じたことに最も近い答えに○をつけてください。必ず 10 項目全部に答えてください。</p> 
@@ -22,35 +21,12 @@
 </template>
 
 <script>
-// 必要なものはここでインポートする
-// @は/srcの同じ意味です
-// import something from '@/components/something.vue';
-
 export default {
   name: 'Diagnose',
-
-  components: {
-    // 読み込んだコンポーネント名をここに記述する
-  },
-
-  data() {
-    // Vue.jsで使う変数はここに記述する
-    return {
-    };
-  },
-
-  computed: {
-    // 計算した結果を変数として利用したいときはここに記述する
-  },
-
-  methods: {
-    // Vue.jsで使う関数はここで記述する
-  },
 }
 </script>
 
 <style scoped>
-/* このコンポーネントだけに適用するCSSはここに記述する */
 .ui.main.container {
     margin-top:50px;
     background-color: #fff;
