@@ -21,7 +21,12 @@ li {
   list-style:none;
 }
 
-input {
+.item {
+    text-decoration: none;
+    color: #fff;
+}
+
+input[type="text"]{
   height: 28px;
   border:none;
   border-radius: 5px;
