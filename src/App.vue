@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <main>
+      <router-view />
+    </main>
   </div>
   <Footer />
 </template>
@@ -24,5 +26,14 @@ export default {
     }
   }
 }
-
 </script>
+
+<style>
+  #app {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+  }
+  main {
+    margin: 0 15px;
+  }
+</style>
