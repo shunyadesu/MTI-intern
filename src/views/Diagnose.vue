@@ -154,9 +154,23 @@ export default {
     
     async postDiagnose(){
       try {
-        const { q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 } = this.questions;
+        const { q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 } = this.questions;
         const userId = this.userId;
-        const requestBody = { userId, q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 }
+        const requestBody = { 
+          userId : userId,
+          questions{
+            q1: q1,
+            q2: q2,
+            q3: q3,
+            q4: q4,
+            q5: q5,
+            q6: q6,
+            q7: q7,
+            q8: q8,
+            q9: q9,
+            q10: q10
+          }
+        }
         const res = await fetch(baseUrl + '/epsd', {
           method: 'POST',
           body: JSON.stringify(requestBody),
@@ -165,11 +179,13 @@ export default {
         const text = await res.text();
         const jsonData = text ? JSON.parse(text) : {}
         
-        if (!res.ok) {
-          throw new Error(jsonData.message ?? 'エラーメッセージがありません')
+        if(jsonData.Epsd){
+          this.$router.push("/negative")
+        }else{
+          this.$router.push("/positive")
         }
       } catch(e) {
-        this.message.text = e.message ?? 'エラーメッセージがありません';
+        
       }
       return
     },
