@@ -3,8 +3,8 @@
     <div class="top-page">
       <!-- 基本的なコンテンツはここに記載する -->
       <div class="button">
-        <input type="button" name="新規登録" value="新規登録" class="button1"/>
-        <input type="button" name="ログイン" value="ログイン" class="button1"/>
+        <input type="button" name="新規登録" value="新規登録" class="button1" @click='this.$router.push("/login")'/>
+        <input type="button" name="ログイン" value="ログイン" class="button1" @click='this.$router.push("/login")'/>
       </div>
       <div class = "top-image">
        <img src = "@/assets/img/Toplogo.png">
@@ -157,6 +157,5 @@ export default {
 }
 .box-item.text.left {
   left: 0;
-  margin: 50px 0, 0, 50px;
 }
 </style>
