@@ -1,17 +1,21 @@
 <template>
   <div id="app">
-    <Menu v-if='isMenuShow' />
+    <Header />
     <router-view />
   </div>
+  <Footer />
 </template>
 <script>
+
 import { RouterView } from 'vue-router'
-import Menu from '@/components/Menu.vue'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    Menu
+    Header,
+    Footer
   },
   computed: {
     isMenuShow() {
