@@ -1,7 +1,7 @@
 const { DynamoDBClient, ScanCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-post";
+const TableName = "team1-post";
 
 const isValid = (query) => {
   return (
@@ -33,13 +33,12 @@ exports.handler = async (event, context) => {
       KeyConditionExpression: "userId = :uid AND createdAt = :cdat",
       ExpressionAttributeValues: marshall({
         ":uid": postIds[0],
-        ":cdat": postIds[1]
+        ":cdat": Number(postIds[1])
       }),
     }
     const command = new QueryCommand(params)
     const postTmp = (await client.send(command)).Items
     const post = unmarshall(postTmp[0])
-    
     const childParams = {
       TableName,
       IndexName: "parentPostId-createdAt-index",
@@ -51,7 +50,6 @@ exports.handler = async (event, context) => {
     const childCommand = new QueryCommand(childParams)
     const childPostsTmp = (await client.send(childCommand)).Items
     const childPosts = childPostsTmp.map((v) => unmarshall(v))
-    
     response.body = JSON.stringify({
       ...post,
       cPost: childPosts

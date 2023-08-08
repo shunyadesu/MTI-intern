@@ -1,7 +1,7 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-epsd";
+const TableName = "team1-epsd";
 
 const isValid = (body) => {
   const reAge = new RegExp('[0-3]')
@@ -75,7 +75,7 @@ exports.handler = async (event, context) => {
         score: score,
         isEpsd: (score >= 9),
         questions: body.questions,
-        createdAt: d.toISOString()
+        date: Date.parse(d.toISOString())
       })
     }
     const command = new PutItemCommand(param);

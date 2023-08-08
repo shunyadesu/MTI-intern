@@ -1,7 +1,7 @@
 const { DynamoDBClient, ScanCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-post";
+const TableName = "team1-post";
 
 exports.handler = async (event, context) => {
   //レスポンスの雛形
@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
     } else if (query?.genre) {
       const params = {
         TableName,
-        IndexName: "genre-post-index",
+        IndexName: "genre-createdAt-index",
         KeyConditionExpression: "genre = :genre",
         ExpressionAttributeValues: marshall({
           ":genre": query.genre

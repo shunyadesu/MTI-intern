@@ -5,7 +5,7 @@ const {
 } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-user";
+const TableName = "team1-user";
 
 const isValid = (body) => {
   return (

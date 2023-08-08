@@ -1,7 +1,7 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-chat";
+const TableName = "team1-message";
 
 const isValid = (body) => {
   return (
@@ -30,9 +30,9 @@ exports.handler = async (event, context) => {
     const param = {
       TableName,
       Item: marshall({
-        chatId: body.userId,
+        userId: body.userId,
         context: body.context,
-        createdAt: new Date().toISOString()
+        createdAt: Date.now()
       })
     }
     console.log(param)

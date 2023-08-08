@@ -1,7 +1,7 @@
 const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-epsd";
+const TableName = "team1-epsd";
 
 const isValid = (query) => {
   return (
@@ -32,21 +32,12 @@ exports.handler = async (event, context) => {
     d.setSeconds(0);
     d.setMilliseconds(0)
     
-    // const params = {
-    //   TableName,
-    //   KeyConditionExpression: "userId = :uid AND createdAt = :cdat",
-    //   ExpressionAttributeValues: marshall({
-    //     ":uid": query.userId,
-    //     ":cdat": d.toISOString()
-    //   })
-    // }
     const params = {
       TableName,
-      KeyConditionExpression: "userId = :uid",
-      FilterExpression: "createdAt = :cdat",
+      KeyConditionExpression: "userId = :uid AND date = :cdat",
       ExpressionAttributeValues: marshall({
         ":uid": query.userId,
-        ":cdat": d.toISOString()
+        ":cdat": Date.parse(d.toISOString())
       })
     }
     

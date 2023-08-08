@@ -5,7 +5,7 @@ const {
 } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-user";
+const TableName = "team1-user";
 
 const isValid = (body) => {
   return (
@@ -49,8 +49,7 @@ exports.handler = async (event, context) => {
     const params = {
       TableName,
       Key: marshall({
-        userId: body.userId,
-        createdAt: unmarshall(loginUser.Items[0]).createdAt
+        userId: body.userId
       })
     };
     console.log(params)

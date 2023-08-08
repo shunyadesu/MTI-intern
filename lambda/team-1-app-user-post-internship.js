@@ -1,11 +1,9 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-user";
+const TableName = "team1-user";
 
 const isValid = (body) => {
-  // const reString = new RegExp('.{5}')
-  // const reAge = new RegExp('[0-9]{1,3}')
   return (
     !!body &&
     !!body?.userId &&
@@ -48,10 +46,8 @@ exports.handler = async (event, context) => {
         createdAt: Date.now()
       })
     };
-    
-    // DBにデータを登録するコマンドを用意
+    console.log(param)
     const command = new PutItemCommand(param);
-    // client.send()でDBにデータを登録するコマンドを実行
     await client.send(command);
     
     response.statusCode = 201

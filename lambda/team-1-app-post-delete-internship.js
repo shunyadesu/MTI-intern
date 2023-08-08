@@ -5,8 +5,8 @@ const {
 } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-post";
-const UserTableName = "team-1-user";
+const TableName = "team1-post";
+const UserTableName = "team1-user";
 
 const isValid = (body) => {
   return (
@@ -52,8 +52,8 @@ exports.handler = async (event, context) => {
       TableName,
       Key: marshall({
         userId: postIds[0],
-        createdAt: postIds[1]
-      })
+        createdAt: Number(postIds[1])
+      })    
     };
     console.log(params)
     const command = new DeleteItemCommand(params);

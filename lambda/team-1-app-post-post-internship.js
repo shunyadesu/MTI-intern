@@ -1,7 +1,7 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-post";
+const TableName = "team1-post";
 
 const isValid = (body) => {
   return (
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
     }
     
     // オブジェクトの作成
-    const d = new Date().toISOString()
+    const d = Date.now()
     let key = {
       userId: body.userId,
       nickname: body.nickname,

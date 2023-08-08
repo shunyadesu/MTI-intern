@@ -1,7 +1,7 @@
 const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "team-1-chat";
+const TableName = "team1-message";
 
 const isValid = (query) => {
   return (
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
       TableName,
       Limit: 50,
       ScanIndexForward: false,
-      KeyConditionExpression: "chatId = :uid",
+      KeyConditionExpression: "userId = :uid",
       ExpressionAttributeValues: marshall({
         ":uid": query.userId
       })
