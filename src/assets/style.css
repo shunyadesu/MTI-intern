@@ -1,6 +1,7 @@
 /* 全体で共通のCSSはこのファイルに記述する */
 html {
   background-color: #fff;
+  height: auto;
 }
 
 body {
