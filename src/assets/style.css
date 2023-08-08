@@ -11,6 +11,12 @@ body {
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.21);
 }
 
+@media screen and (max-width: 500px) {
+  body {
+    width: 100%;
+  }
+}
+
 li {
   list-style:none;
 }
@@ -46,35 +52,6 @@ button:hover {
   margin-top: 30px;
 }
 
-.header {
-  background-color: #FFB7C8;
-  height: 60px;
-  box-shadow: 0 2px 4px #DEDEDE;
-  display: flex;
-  justify-content: flex-end; /* 横方向に右寄せ */
-  align-items: center; /* 縦方向に中央寄せ */
-}
-
-.header input {
-  height: 30px;
-  width: 40%;
-}
-
-.footer {
-  height: 80px;
-  background-color: #FFB7C8;
-  text-align: center;
-  color: #fff; 
-  font-size: 10px
-}
-
-.footer img {
-  height: 60px;
-}
-
-.footer p {
-  margin-top: -5px;
-}
 
 /*header画像*/
 .search {
