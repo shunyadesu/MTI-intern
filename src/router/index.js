@@ -10,6 +10,7 @@ import Negative from '../views/Negative.vue'
 import Positive from '../views/Positive.vue'
 import Diagnose from '../views/Diagnose.vue'
 import Diagnosehome from '../views/Diagnosehome.vue'
+import Search from '../views/Search.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -108,6 +109,15 @@ const router = createRouter({
       component: Diagnosehome,
       meta: {
         title: 'Diagnosehoem',
+        isRequiredAuth: true
+      }
+    }, 
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
+      meta: {
+        title: 'Search',
         isRequiredAuth: true
       }
     },  
