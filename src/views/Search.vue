@@ -19,7 +19,19 @@
         {{ successMsg }}
       </p>
 
-      <!-- 投稿一覧 -->
+      
+      <!-- 投稿検索 -->
+      <div class="search">
+      <!--<select name="selectedOption" id="selectedOption" v-model="selectedValue">-->
+      <!--  <option value="userId">ユーザーID</option>-->
+      <!--  <option value="genre">ジャンル</option>-->
+      <!--</select>-->
+      
+      <input type="text" name="" class="text" v-model="posts.genre"/>
+      <button type="submit" @click="getSearchedArticles"><i class="search icon"></i></button>
+      </div>
+
+      <!-- 投稿一覧 -->      
       <div>
         <h1>開発中</h1>
         <template v-for="(post, index) in posts" :key="index">
@@ -33,7 +45,7 @@
                 {{ convertToLocaleString(post.createdAt) }}
               </div>
               <div class="description">
-                {{ post.context }}
+                {{ posts.context }}
               </div>
             </div>
             <div class="extra content">
@@ -56,24 +68,17 @@
 import { baseUrl } from "@/assets/config.js";
 
 export default {
-  name: "Home",
+  name: "Search",
 
   data() {
     // Vue.jsで使う変数はここに記述する
     return {
       isLoading: false,
+      posts: {
+        userId: null,
+        genre: null,
+      }, 
       posts: [],
-      // post: {
-      //   text: null,
-      //   category: null,
-      // },
-      // search: {
-      //   userId: null,
-      //   category: null,
-      //   start: null,
-      //   end: null,
-      // },
-      // iam: null,
       successMsg: "",
       errorMsg: "",
     };
@@ -135,6 +140,41 @@ export default {
     convertToLocaleString(timestamp) {
       return new Date(timestamp).toLocaleString();
     },
+    
+    // 検索   
+    async getSearchedArticles() {
+      if (this.isCallingApi) {
+        return;
+      }
+      this.isCallingApi = true;
+
+      const { genre } = this.posts;
+      const genres = genre;
+      const qs = `genre=${genres}`;
+
+      try {
+        const res = await fetch(baseUrl + `/posts?${qs}`, {
+          method: "GET",
+        });
+
+        const text = await res.text();
+        const jsonData = text ? JSON.parse(text) : {};
+
+        // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
+        if (!res.ok) {
+          const errorMessage =
+            jsonData.message ?? "エラーメッセージがありません";
+          throw new Error(errorMessage);
+        }
+
+        this.articles = jsonData.articles;
+      } catch (e) {
+        console.error(e);
+        this.errorMsg = e;
+      } finally {
+        this.isCallingApi = false;
+      }
+    },
   },
 };
 </script>
@@ -143,6 +183,22 @@ export default {
 /* このコンポーネントだけに適用するCSSはここに記述する */
 .card {
   width: 100%;
+}
+
+.search {
+  margin: 0 auto;
+  display: flex;
+}
+
+.text {
+  margin-right: 20px;
+  width: 500px;
+}
+
+button {
+  width: 36px;
+  height: 36px;
+  margin: auto;
 }
 
 </style>
