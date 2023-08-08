@@ -73,6 +73,7 @@ const router = createRouter({
         title: 'TopPage',
       }
     },
+    {
       path: '/negative',
       name: 'Negative',
       component: Negative,
