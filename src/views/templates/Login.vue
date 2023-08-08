@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-wrapper">
     <Loading :isShow='isLoading' />
     <div class="ui main container">
       <!-- 基本的なコンテンツはここに記載する -->
@@ -171,22 +171,27 @@ export default {
 </script>
 
 <style scoped>
-  .login,.signup {
-    width: 25%;
-    margin: 5px auto 5px;
-    font-size: 15px;
-  }
-  
-  .ui.main.container {
-    text-align: center;
-  }
-  
-  .ui.segment {
-    padding: 20px;
-    padding-top: 30px;
-  }
-  
-  input {
-    margin: 10px;
-  }
+.login,.signup {
+  width: 25%;
+  margin: 5px auto 5px;
+  font-size: 15px;
+}
+
+.ui.main.container {
+  text-align: center;
+}
+
+.ui.segment {
+  padding: 20px;
+  padding-top: 30px;
+}
+
+input {
+  margin: 10px;
+}
+.login-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
 </style>

@@ -49,37 +49,21 @@
 </template>
 
 <script>
-// 必要なものはここでインポートする
-// @は/srcと同じ意味です
-// import something from '@/components/something.vue';
 import { baseUrl } from "@/assets/config.js";
 
 export default {
   name: "Home",
 
   data() {
-    // Vue.jsで使う変数はここに記述する
     return {
       isLoading: false,
       posts: [],
-      // post: {
-      //   text: null,
-      //   category: null,
-      // },
-      // search: {
-      //   userId: null,
-      //   category: null,
-      //   start: null,
-      //   end: null,
-      // },
-      // iam: null,
       successMsg: "",
       errorMsg: "",
     };
   },
 
   computed: {
-    // 計算した結果を変数として利用したいときはここに記述する
     isPostButtonDisabled() {
       return !this.post.text;
     },
@@ -148,52 +132,8 @@ export default {
 </script>
 
 <style scoped>
-/* このコンポーネントだけに適用するCSSはここに記述する */
 .card {
   width: 100%;
+  border-radius: 15px;
 }
-/*html {*/
-/*    height: auto;*/
-/*}*/
-
-/*.ui.segment {*/
-/* margin-bottom: 0 20px 30px 20px; */
-/*}*/
-
-/*.content {*/
-/*  margin: 0 20px 30px 20px;*/
-/*}*/
-
-/*.article-list {*/
-/*  list-style: none;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  max-width: 100%;*/
-/*}*/
-
-/*.right-align {*/
-/*  text-align: rignt;*/
-/*}*/
-
-/*.ui.divider {*/
-/*  margin: 0;*/
-/*}*/
-
-/*.two-button {*/
-/*  dispay: flex;*/
-/*  margin: 10px;*/
-/*  justify-content: space-between;*/
-/*}*/
-
-/*button {*/
-/*  background-color: #FFB7C8;*/
-/*  border: none;*/
-/*  margin: 0 20px 0 20px;*/
-/*}*/
-
-/*i {*/
-/*  color:#fff;*/
-/*  padding:0;*/
-/*}*/
-
 </style>
