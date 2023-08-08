@@ -8,6 +8,7 @@ import Post from '../views/Post.vue'
 import TopPage from '../views/TopPage.vue'
 import Negative from '../views/Negative.vue'
 import Positive from '../views/Positive.vue'
+import Chat from '../views/Chat.vue'
 import Diagnose from '../views/Diagnose.vue'
 import Diagnosehome from '../views/Diagnosehome.vue'
 import Search from '../views/Search.vue'
@@ -91,6 +92,15 @@ const router = createRouter({
       component: Positive,
       meta: {
         title: 'Positive',
+        isRequiredAuth: true
+      }
+    },
+    {
+      path: '/chat',
+      name: 'Chat',
+      component: Chat,
+      meta: {
+        title: 'Chat',
         isRequiredAuth: true
       }
     },
