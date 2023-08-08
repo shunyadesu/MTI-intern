@@ -93,6 +93,7 @@
 // 必要なものはここでインポートする
 // @は/srcの同じ意味です
 // import something from '@/components/something.vue';
+import { baseUrl } from "@/assets/config.js";
 
 export default {
   name: 'Diagnose',
@@ -155,15 +156,17 @@ export default {
         const text = await res.text();
         const jsonData = text ? JSON.parse(text) : {}
         
+        if(!res.ok){
+          const errorMessage = jsonData.message ?? 'エラーメッセージなし';
+          throw new Error(errorMessage);
+        }
+        
         if(jsonData.isEpsd){
           this.$router.push("/negative")
         }else{
           this.$router.push("/positive")
         }
-        if(!res.ok){
-          const errorMessage = jsonData.message ?? 'エラーメッセージなし';
-          throw new Error(errorMessage);
-        }
+        
       } catch(e) {
         
       }
