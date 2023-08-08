@@ -31,12 +31,12 @@
               <input type="text" placeholder="Age" v-model="user.age">
             </div>
           </div>
-          <button class="ui button huge green fluid" type="submit" :disabled='formValid'>
+          <button type="submit" :disabled='formValid' class="login">
             {{ submitText }}
           </button>
         </form>
       </div>
-      <button class="ui button large gray fluid" type="submit" @click="toggleMode">
+      <button type="submit" @click="toggleMode" class="signup">
         {{ toggleText }}
       </button>
     </div>
@@ -169,3 +169,24 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  .login,.signup {
+    width: 25%;
+    margin: 5px auto 5px;
+    font-size: 15px;
+  }
+  
+  .ui.main.container {
+    text-align: center;
+  }
+  
+  .ui.segment {
+    padding: 20px;
+    padding-top: 30px;
+  }
+  
+  input {
+    margin: 10px;
+  }
+</style>

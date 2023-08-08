@@ -13,10 +13,10 @@
       
       <div class="offcanvas-body">
         <ul>
-          <li><a class="dropdown-item" href="#">ホーム</a></li>
-          <li><a class="dropdown-item" href="#">検索</a></li>
-          <li><a class="dropdown-item" href="#">プロフィール</a></li>
-          <li><a class="dropdown-item" href="#">セルフ診断</a></li>
+          <li><a class="dropdown-item" href="/home">ホーム</a></li>
+          <li><a class="dropdown-item" href="#/search">検索</a></li>
+          <li><a class="dropdown-item" href="#/profile">プロフィール</a></li>
+          <li><a class="dropdown-item" href="#/diagnosehome">セルフ診断</a></li>
           <li><a class="dropdown-item" href="#">専門家に相談</a></li>
         </ul>
       </div>
@@ -24,7 +24,7 @@
       <div class="key-menu">
         <ul class="icon-list">
           <li><a class="dropdown-item" href="#"><i class="big wrench icon"></i></a></li>
-          <li><a class="dropdown-item" href="#"><i class="big sign out alternate icon"></i></a></li>
+          <li><a class="dropdown-item" href="#" @click="logout"><i class="big sign out alternate icon"></i></a></li>
         </ul>
       </div>
       
@@ -34,6 +34,31 @@
 </template>
 
 <script>
+export default {
+  name: 'Slidebar',
+
+  components: {
+    // 読み込んだコンポーネント名をここに記述する
+  },
+
+  data() {
+    // Vue.jsで使う変数はここに記述する
+    return {
+    };
+  },
+
+  computed: {
+    // 計算した結果を変数として利用したいときはここに記述する
+  },
+
+  methods: {
+    // Vue.jsで使う関数はここで記述する
+    logout() {
+      window.localStorage.clear();
+      this.$router.push({ name: 'Login' });
+    }
+  },
+}
 </script>
 
 <style scoped>
