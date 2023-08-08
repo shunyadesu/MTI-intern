@@ -8,29 +8,47 @@
     </div>
     <div class="text">{{ user.nickname }}</div>
     <div class="text">{{ user.introduction }}</div>
-    <div class="box">
+    <div class="panel">
       <div class="select">
-        <div class="text">投稿</div>
-        <div class="text">いいね</div>
+        <div class="select-btn" :class="panel == 'posts' ? 'active':''" @click="panel = 'posts'">投稿</div>
+        <!--<div class="select-btn" :class="panel == 'likes' ? 'active':''" @click="panel = 'likes'">いいね</div>-->
+        <div class="select-btn" :class="panel == 'likes' ? 'active':''"><s>いいね</s></div>
       </div>
-      <div>
-        <div class="ui card">
-          <div class="content">
-            <div class="header">
-              テスト
-              <a class="ui tag label mini right floated">ジャンル</a>
-            </div>
-            <div class="meta">
-              {{ convertToLocaleString("2023/02/02") }}
-            </div>
-            <div class="description">
-              テスト
+      <div v-if='panel == "posts"' class="panel-content">
+        <template v-for="(post, index) in posts" :key="index">
+          <div class="ui card">
+            <div class="content">
+              <div class="header">
+                {{ post.nickname }}
+                <a class="ui tag label mini right floated">{{ post.genre }}</a>
+              </div>
+              <div class="meta">
+                {{ convertToLocaleString(post.createdAt) }}
+              </div>
+              <div class="description">
+                {{ post.context }}
+              </div>
             </div>
           </div>
-        </div>
+        </template>
       </div>
-      <div>
-        
+      <div v-if='panel == "likes"' class="panel-content">
+        <template v-for="(post, index) in likes" :key="index">
+          <div class="ui card">
+            <div class="content">
+              <div class="header">
+                {{ post.nickname }}
+                <a class="ui tag label mini right floated">{{ post.genre }}</a>
+              </div>
+              <div class="meta">
+                {{ convertToLocaleString(post.createdAt) }}
+              </div>
+              <div class="description">
+                {{ post.context }}
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -55,6 +73,7 @@ export default {
       },
       posts: [],
       likes: [],
+      panel: 'posts',
       isLoading: false,
       message: {
         isShow: false,
@@ -181,15 +200,31 @@ export default {
   margin-bottom: 10px;
 }
 
-.select{
+.panel {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 30px;
+}
+.card {
+  width: 100%;
+}
+
+.select {
   width: 100%;
   height: 3em;
   background-color: white;
-  margin-top: 30px;
   display: flex;
   justify-content: space-around;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  border-bottom: solid 1px #e7e7e7;
+  cursor: pointer;
+}
+
+.select-btn {
+  padding: 0.3em 1em;
+  border-radius: 3em;
+  font-weight: bold;
 }
 
 .profile .index .text{
@@ -200,5 +235,13 @@ export default {
   font-weight: 600;
   display: flex;
   align-items:center;
+}
+
+.panel-content {
+  margin: 1em 0;
+}
+
+.active {
+  background-color: #FFB7C8;
 }
 </style>
