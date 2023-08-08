@@ -70,6 +70,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/post/:pid',
+      name: 'Post-p',
+      component: Post,
+      meta: {
+        title: 'Post',
+        isRequiredAuth: true
+      }
+    },
+    {
       path: '/TopPage',
       name: 'TopPage',
       component: TopPage,
@@ -136,7 +145,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.isRequiredAuth)) {
-    if (window.localStorage.getItem('token') !== 'mtiToken') {
+    if (
+      !window.localStorage.getItem('userId') ||
+      !window.localStorage.getItem('password') ||
+      !window.localStorage.getItem('nickname')
+    ) {
       next({
         path: '/login'
       })

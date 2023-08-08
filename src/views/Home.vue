@@ -39,7 +39,9 @@
               <span class="right floated">
                 <i class="heart outline like icon"></i>
               </span>
-              <i class="comment icon"></i>
+              <router-link :to="'/post/' + post.postId">
+                <i class="comment icon"></i>
+              </router-link>
             </div>
           </div>
         </template>
