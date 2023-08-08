@@ -1,21 +1,24 @@
 /* 全体で共通のCSSはこのファイルに記述する */
 html {
   background-color: #fff;
+  height: auto;
 }
 
 body {
-  background-color: #DADADA;
+  width: 500px;
   margin: 0 auto;
   background-color: #FCF4F6;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.21);
 }
 
-/* 小デバイス（横向きモバイル, 576px 以上） */
-@media (min-width: 576px) {
-  body{
-    width: 576px;
-    margin: 0 auto;
-  }  
+@media screen and (max-width: 500px) {
+  body {
+    width: 100%;
+  }
+}
+
+li {
+  list-style:none;
 }
 
 input {
@@ -29,42 +32,41 @@ input {
   box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
+button {
+  background-color: #FFB7C8;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.21);
+}
+
+button:hover {
+  background-color: #E2E2E2;
+  cursor: pointer;
+  cursor: hand;
+}
+
 .main.container {
   margin-top: 30px;
 }
 
-.header {
-  background-color: #FFB7C8;
-  height: 60px;
-  box-shadow: 0 2px 4px #DEDEDE;
-  display: flex;
-  justify-content: flex-end; /* 横方向に右寄せ */
-  align-items: center; /* 縦方向に中央寄せ */
-}
-
-.header input {
-  height: 30px;
-  width: 40%
-}
-
-.footer {
-  height: 80px;
-  background-color: #FFB7C8;
-  text-align: center;
-  color: #fff; 
-  font-size: 10px
-}
-
-.footer img {
-  height: 60px;
-}
-
-.footer p {
-  margin-top: -5px;
-}
 
 /*header画像*/
 .search {
   width: 50px;
 }
 
+.post-header {
+  margin: 0 auto;
+}
+
+.post {
+  text-align: center;
+}
+
+/*ホームページ*/
+.content {
+  background-color: #fff;
+}
