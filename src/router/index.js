@@ -5,9 +5,9 @@ import Profile from '../views/templates/Profile.vue'
 import ProfileEdit from '../views/templates/ProfileEdit.vue'
 import User from '../views/templates/User.vue'
 import Post from '../views/Post.vue'
+import TopPage from '../views/TopPage.vue'
 import Negative from '../views/Negative.vue'
 import Positive from '../views/Positive.vue'
-
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -66,6 +66,13 @@ const router = createRouter({
       }
     },
     {
+      path: '/TopPage',
+      name: 'TopPage',
+      component: TopPage,
+      meta: {
+        title: 'TopPage',
+      }
+    },
       path: '/negative',
       name: 'Negative',
       component: Negative,
