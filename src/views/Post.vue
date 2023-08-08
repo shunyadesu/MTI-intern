@@ -153,7 +153,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .post{
     background-color: white;
     width: 90%;
