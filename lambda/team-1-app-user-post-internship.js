@@ -1,7 +1,20 @@
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
-const { marshall } = require("@aws-sdk/util-dynamodb");
+const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const TableName = "User";
+const TableName = "team1-user";
+
+const isValid = (body) => {
+  return (
+    !!body &&
+    !!body?.userId &&
+    !!body?.email &&
+    !!body?.password &&
+    !!body?.birthday &&
+    !!body?.nickname &&
+    !!body?.gender &&
+    !!body?.prefecture
+  )
+}
 
 exports.handler = async (event, context) => {
   const response = {
@@ -12,49 +25,47 @@ exports.handler = async (event, context) => {
     body: JSON.stringify({ message: "" }),
   };
 
-  const reString = new RegExp('.{5}')
-  const reAge = new RegExp('[0-9]{1,3}')
-  
   // TODO: リクエストボディの中身をJavaScriptオブジェクトに変換し、1つ、あるいは複数の変数に代入する
-  const body = event.body ? JSON.parse(event.body) : null
-  if (body && reString.test(body.userId || '') && reString.test(body.password || '') && reString.test(body.nickname || '') && reAge.test(body.age || 9999)) {
+  const body = event.body ? JSON.parse(event.body) : {}
+  try {
+    if (!isValid(body)) {
+      throw new Error('必要なパラメータが足りません')
+    }
+    
     // TODO: DBに登録するための情報をparamオブジェクトとして宣言する（中身を記述）
     const param = {
       TableName,
       Item: marshall({
         userId: body.userId,
+        email: body.email,
         password: body.password,
+        birthday: body.birthday,
         nickname: body.nickname,
-        age: body.age
+        gender: body.gender,
+        prefecture: body.prefecture,
+        createdAt: Date.now()
       })
     };
-    // DBにデータを登録するコマンドを用意
+    console.log(param)
     const command = new PutItemCommand(param);
-  
-    try {
-      // client.send()でDBにデータを登録するコマンドを実行
-      await client.send(command);
-      // TODO: 登録に成功した場合の処理を記載する。(status codeの設定と、response bodyの設定)
-      response.statusCode = 201
+    await client.send(command);
+    
+    response.statusCode = 201
+    response.body = JSON.stringify(unmarshall(param.Item))
+    
+  } catch(e) {
+    if (e.message === "必要なパラメータが足りません") {
+      response.statusCode = 400
       response.body = JSON.stringify({
-        userId: body.userId,
-        nickname: body.nickname,
-        age: body.age
+        message: '必要なパラメータが足りません'
       })
-      
-    } catch (e) {
+    } else {
       response.statusCode = 500;
       response.body = JSON.stringify({
         message: "予期せぬエラーが発生しました。",
         errorDetail: e.toString(),
       });
     }
-    
-  } else {
-    response.statusCode = 400
-    response.body = JSON.stringify({
-      message: '必要なパラメータが足りません'
-    })
   }
 
   return response;
