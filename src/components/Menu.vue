@@ -1,28 +1,13 @@
 <template>
-  <div class="ui secondary pointing green inverted massive menu">
-    <router-link active-class="active" class="item" exact to="/">Home</router-link>
-    <router-link active-class="active" class="item" to="/User">User</router-link>
-    <router-link active-class="active" class="item" to="/Profile">Profile</router-link>
-    <div class="right menu">
-      <button class="item" @click="logout" style="cursor: pointer;">Logout</button>
-    </div>
+  <div>
+    <b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
+    <b-sidebar id="sidebar-1" title="Sidebar" shadow>
+      <div class="px-3 py-2">
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+          in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+      </div>
+    </b-sidebar>
   </div>
 </template>
-<script>
-  export default {
-    name: 'Menu',
-    computed: {
-      
-    },
-    methods: {
-      logout() {
-        window.localStorage.clear();
-        this.$router.push({name: "Login"})
-      }
-    }
-  }
-</script>
-
-<style scoped>
-    
-</style>
