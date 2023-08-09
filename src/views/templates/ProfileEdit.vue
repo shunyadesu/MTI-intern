@@ -73,11 +73,7 @@ export default {
   computed: {
     isValid: function() {
       return (
-        !!this.user.nickname &&
-        !!this.user.introduction &&
-        !!this.user.birthday &&
-        !!this.user.gender &&
-        !!this.user.prefecture
+        !!this.user.nickname
       )
     }
   },
@@ -116,11 +112,14 @@ export default {
         const requestBody = {
           userId: this.user.userId,
           password: window.localStorage.getItem('password'),
-          birthday: this.user.birthday,
-          nickname: this.user.nickname,
-          gender: this.user.gender,
-          prefecture: this.user.prefecture
+          introduction: this.user.introduction ?? "",
+          birthday: this.user.birthday ?? "",
+          nickname: this.user.nickname ?? "",
+          gender: this.user.gender ?? "",
+          prefecture: this.user.prefecture ?? ""
         }
+        
+        console.log(requestBody)
         
         const res = await fetch(`${baseUrl}/user`, {
           method: 'PUT',
