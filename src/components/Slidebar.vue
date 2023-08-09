@@ -11,11 +11,11 @@
       </div>
       <div class="offcanvas-body">
         <ul>
-          <li><router-link to='/'>ホーム</router-link></li>
-          <li><router-link to='/search'>検索</router-link></li>
-          <li><router-link to='/profile'>プロフィール</router-link></li>
-          <li><router-link to='/diagnosehome'>セルフ診断</router-link></li>
-          <li><router-link to='/chat'>専門家に相談</router-link></li>
+          <li><router-link to='/'><i class="home icon"></i>ホーム</router-link></li>
+          <li><router-link to='/search'><i class="search icon"></i>検索</router-link></li>
+          <li><router-link to='/profile'><i class="user icon"></i>プロフィール</router-link></li>
+          <li><router-link to='/diagnosehome'><i class="calendar check icon"></i>セルフ診断</router-link></li>
+          <li><router-link to='/chat'><i class="user md icon"></i>専門家に相談</router-link></li>
         </ul>
       </div>
       <div class="key-menu">
@@ -97,4 +97,9 @@ a {
   font-weight: bold;
   text-decoration: none;
 }
+
+.home.icon,.search.icon,.user.icon,.calendar.check.icon,.user.md.icon {
+  margin-right: 15px;
+}
+
 </style>
