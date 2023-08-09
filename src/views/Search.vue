@@ -43,7 +43,7 @@
                 {{ convertToLocaleString(post.createdAt) }}
               </div>
               <div class="description">
-                {{ posts.context }}
+                {{ post.context }}
               </div>
             </div>
             <div class="extra content">
