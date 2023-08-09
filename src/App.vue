@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header v-if="$route.name !== 'TopPage'"/>
+    <Header v-if="$route.name !== 'Lp'"/>
     <main>
       <router-view />
     </main>
