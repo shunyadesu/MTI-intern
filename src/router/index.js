@@ -21,6 +21,7 @@ const router = createRouter({
       name: 'Home',
       component: Home,
       meta: {
+
         isRequiredAuth: true
       }
     },
@@ -28,13 +29,14 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: Login,
+
     },
     {
       path: '/profile',
       name: 'Profile',
       component: Profile,
       meta: {
-        title: 'Profile',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -43,6 +45,7 @@ const router = createRouter({
       name: 'ProfileEdit',
       component: ProfileEdit,
       meta: {
+
         isRequiredAuth: true
       }
     },
@@ -59,6 +62,7 @@ const router = createRouter({
       name: 'Post',
       component: Post,
       meta: {
+
         isRequiredAuth: true
       }
     },
@@ -67,6 +71,7 @@ const router = createRouter({
       name: 'Post-p',
       component: Post,
       meta: {
+
         isRequiredAuth: true
       }
     },
@@ -74,12 +79,14 @@ const router = createRouter({
       path: '/lp',
       name: 'Lp',
       component: TopPage,
+
     },
     {
       path: '/negative',
       name: 'Negative',
       component: Negative,
       meta: {
+
         isRequiredAuth: true
       }
     },
@@ -88,6 +95,7 @@ const router = createRouter({
       name: 'Positive',
       component: Positive,
       meta: {
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -96,6 +104,7 @@ const router = createRouter({
       name: 'Chat',
       component: Chat,
       meta: {
+
         isRequiredAuth: true
       }
     },
@@ -104,6 +113,7 @@ const router = createRouter({
       name: 'Diagnose',
       component: Diagnose,
       meta: {
+
         isRequiredAuth: true
       }
     }, 
@@ -112,6 +122,10 @@ const router = createRouter({
       name: 'Diagnosehome',
       component: Diagnosehome,
       meta: {
+<<<<<<< HEAD
+=======
+        title: 'ままのいえ',
+>>>>>>> f0e89e937ba10b2ba6ada71184ec76e72d8f3386
         isRequiredAuth: true
       }
     }, 
@@ -120,6 +134,7 @@ const router = createRouter({
       name: 'Search',
       component: Search,
       meta: {
+
         isRequiredAuth: true
       }
     },  
