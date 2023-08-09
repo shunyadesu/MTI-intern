@@ -31,7 +31,7 @@
               <input type="text" placeholder="Nickname" v-model="user.nickname">
             </div>
           </div>
-          <button type="submit" :disabled='formValid' class="login">
+          <button type="submit" :class="formValid ? '' : 'disabled'" class="login">
             {{ submitText }}
           </button>
         </form>
@@ -88,9 +88,9 @@ export default {
     },
     formValid() {
       if (this.isLogin) {
-        return !(this.user.userId && this.user.password)
+        return (this.user.userId && this.user.password)
       } else {
-        return !(this.user.userId && this.user.password && this.user.nickname && this.user.email)
+        return (this.user.userId && this.user.password && this.user.nickname && this.user.email)
       }
     }
   },
@@ -101,6 +101,10 @@ export default {
       this.isLogin = !this.isLogin
     },
     async submit() {
+      if (!this.formValid) {
+        return
+      }
+      
       const { userId, password, nickname, email} = this.user
       
       this.isLoading = true
@@ -197,5 +201,9 @@ input {
   width: 100%;
   height: 100%;
   display: flex;
+}
+
+.disabled {
+  background-color: #cbcbcb;
 }
 </style>
