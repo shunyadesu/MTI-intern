@@ -2,23 +2,23 @@
   <div>
     <Loading :isShow='isLoading' />
     <Message :isShow='message.isShow' :isError='message.isError' :message='message.text'/>
+    <div class="ui card parent" v-if="Object.keys(parentPost).length">
+      <div class="content">
+        <div class="header">
+          {{ parentPost.nickname }}
+          <a class="ui tag label mini right floated">{{ parentPost.genre }}</a>
+        </div>
+        <div class="meta">
+          {{ convertToLocaleString(parentPost.createdAt) }}
+        </div>
+        <div class="description">
+          {{ parentPost.context }}
+        </div>
+      </div>
+    </div>
     <div class='post'>
       <div class="btn-wrapper">
           <div class="btn" :class="isValid ? '' : 'disabled'" @click="sendPost">送信</div>
-      </div>
-      <div class="ui card" v-if="Object.keys(parentPost).length">
-        <div class="content">
-          <div class="header">
-            {{ parentPost.nickname }}
-            <a class="ui tag label mini right floated">{{ parentPost.genre }}</a>
-          </div>
-          <div class="meta">
-            {{ convertToLocaleString(parentPost.createdAt) }}
-          </div>
-          <div class="description">
-            {{ parentPost.context }}
-          </div>
-        </div>
       </div>
       <form>
         <div>
@@ -153,19 +153,23 @@ export default {
 }
 </script>
 <style scoped>
-.post{
+.post {
   background-color: #ffffff;
   width: 90%;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   text-align: left;
+}
+.parent.card {
+  margin-top: 20px;
 }
 
 .btn-wrapper{

@@ -21,7 +21,7 @@ const router = createRouter({
       name: 'Home',
       component: Home,
       meta: {
-        title: 'Home',
+
         isRequiredAuth: true
       }
     },
@@ -29,16 +29,14 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: Login,
-      meta: {
-        title: 'Login'
-      }
+
     },
     {
       path: '/profile',
       name: 'Profile',
       component: Profile,
       meta: {
-        title: 'Profile',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -47,7 +45,7 @@ const router = createRouter({
       name: 'ProfileEdit',
       component: ProfileEdit,
       meta: {
-        title: 'ProfileEdit',
+
         isRequiredAuth: true
       }
     },
@@ -56,8 +54,7 @@ const router = createRouter({
       name: 'User',
       component: User,
       meta: {
-        title: 'User',
-        // isRequiredAuth: true
+        isRequiredAuth: true
       }
     },
     {
@@ -65,7 +62,7 @@ const router = createRouter({
       name: 'Post',
       component: Post,
       meta: {
-        title: 'Post',
+
         isRequiredAuth: true
       }
     },
@@ -74,7 +71,7 @@ const router = createRouter({
       name: 'Post-p',
       component: Post,
       meta: {
-        title: 'Post',
+
         isRequiredAuth: true
       }
     },
@@ -82,16 +79,14 @@ const router = createRouter({
       path: '/lp',
       name: 'Lp',
       component: TopPage,
-      meta: {
-        title: 'TopPage',
-      }
+
     },
     {
       path: '/negative',
       name: 'Negative',
       component: Negative,
       meta: {
-        title: 'Negative',
+
         isRequiredAuth: true
       }
     },
@@ -100,7 +95,7 @@ const router = createRouter({
       name: 'Positive',
       component: Positive,
       meta: {
-        title: 'Positive',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -109,7 +104,7 @@ const router = createRouter({
       name: 'Chat',
       component: Chat,
       meta: {
-        title: 'Chat',
+
         isRequiredAuth: true
       }
     },
@@ -118,7 +113,7 @@ const router = createRouter({
       name: 'Diagnose',
       component: Diagnose,
       meta: {
-        title: 'Diagnose',
+
         isRequiredAuth: true
       }
     }, 
@@ -127,7 +122,7 @@ const router = createRouter({
       name: 'Diagnosehome',
       component: Diagnosehome,
       meta: {
-        title: 'Diagnosehoem',
+
         isRequiredAuth: true
       }
     }, 
@@ -136,7 +131,7 @@ const router = createRouter({
       name: 'Search',
       component: Search,
       meta: {
-        title: 'Search',
+
         isRequiredAuth: true
       }
     },  
@@ -160,11 +155,5 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-
-const DEFAULT_TITLE = 'TITLE';
-
-router.afterEach((to) => {
-  document.title = to.meta.title ?? DEFAULT_TITLE
-})
 
 export default router
