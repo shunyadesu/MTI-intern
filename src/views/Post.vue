@@ -3,6 +3,9 @@
     <Loading :isShow='isLoading' />
     <Message :isShow='message.isShow' :isError='message.isError' :message='message.text'/>
     <div class='post'>
+      <div class="btn-wrapper">
+          <div class="btn" :class="isValid ? '' : 'disabled'" @click="sendPost">送信</div>
+      </div>
       <div class="ui card" v-if="Object.keys(parentPost).length">
         <div class="content">
           <div class="header">
@@ -31,9 +34,6 @@
             <option class="option" value="愛情">愛情</option>
             <option class="option" value="愚痴">愚痴</option>
           </select>
-        </div>
-        <div class="btn-wrapper">
-          <div class="btn" :class="isValid ? '' : 'disabled'" @click="sendPost">送信</div>
         </div>
       </form>
     </div>
@@ -169,9 +169,7 @@ export default {
 }
 
 .btn-wrapper{
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 20px;
+  text-align: right;
 }
 
 .btn {
@@ -194,11 +192,13 @@ export default {
   border: none;
   border-radius: 1em;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
 }
 
 .genre {
   margin-top: 1.5em;
   text-align: right;
+  margin-bottom: 10px;
 }
 
 .label {
@@ -207,7 +207,7 @@ export default {
 }
 .select {
   width: 40%;
-  height: 3em;
+  height: 2em;
   padding: 0.3em 1em;
   border: none;
   border-radius: 1em;

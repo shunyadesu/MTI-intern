@@ -137,6 +137,10 @@ export default {
 </script>
 
 <style scoped>
+.ui.main.container {
+  margin-bottom: 30px;
+}
+
 .card {
   width: 100%;
   border-radius: 15px;
