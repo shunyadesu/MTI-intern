@@ -7,12 +7,9 @@ const isValid = (body) => {
   return (
     !!body &&
     !!body?.userId &&
-    !!body?.email &&
     !!body?.password &&
-    !!body?.birthday &&
-    !!body?.nickname &&
-    !!body?.gender &&
-    !!body?.prefecture
+    !!body?.email &&
+    !!body?.nickname
   )
 }
 
@@ -39,10 +36,11 @@ exports.handler = async (event, context) => {
         userId: body.userId,
         email: body.email,
         password: body.password,
-        birthday: body.birthday,
-        nickname: body.nickname,
-        gender: body.gender,
-        prefecture: body.prefecture,
+        birthday: body?.birthday ?? '',
+        nickname: body?.nickname ?? '',
+        gender: body?.gender ?? '',
+        prefecture: body?.prefecture ?? '',
+        introduction: body?.introduction ?? '',
         createdAt: Date.now()
       })
     };
