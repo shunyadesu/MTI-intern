@@ -52,6 +52,9 @@ exports.handler = async (event, context) => {
     if (body?.email) {
       item.email = body.email
     }
+    if (body?.introduction) {
+      item.introduction = body.introduction
+    }
     if (body?.birthday) {
       item.birthday = body.birthday
     }

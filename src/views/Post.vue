@@ -56,7 +56,7 @@ export default {
     return {
       post: {
         userId: window.localStorage.getItem('userId'),
-        nickname: window.localStorage.getItem('nickname'),
+        password: window.localStorage.getItem('password'),
         genre: null,
         context: null,
       },
@@ -73,7 +73,7 @@ export default {
     isValid: function() {
       return (
         !!this.post.userId &&
-        !!this.post.nickname &&
+        !!this.post.password &&
         !!this.post.genre &&
         !!this.post.context
       )
