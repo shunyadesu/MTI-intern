@@ -122,10 +122,7 @@ const router = createRouter({
       name: 'Diagnosehome',
       component: Diagnosehome,
       meta: {
-<<<<<<< HEAD
-=======
-        title: 'ままのいえ',
->>>>>>> f0e89e937ba10b2ba6ada71184ec76e72d8f3386
+
         isRequiredAuth: true
       }
     }, 
