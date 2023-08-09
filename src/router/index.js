@@ -21,7 +21,7 @@ const router = createRouter({
       name: 'Home',
       component: Home,
       meta: {
-        title: 'Home',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -30,7 +30,7 @@ const router = createRouter({
       name: 'Login',
       component: Login,
       meta: {
-        title: 'Login'
+        title: 'ままのいえ'
       }
     },
     {
@@ -38,7 +38,7 @@ const router = createRouter({
       name: 'Profile',
       component: Profile,
       meta: {
-        title: 'Profile',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -47,7 +47,7 @@ const router = createRouter({
       name: 'ProfileEdit',
       component: ProfileEdit,
       meta: {
-        title: 'ProfileEdit',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -56,7 +56,7 @@ const router = createRouter({
       name: 'User',
       component: User,
       meta: {
-        title: 'User',
+        title: 'ままのいえ',
         // isRequiredAuth: true
       }
     },
@@ -65,7 +65,7 @@ const router = createRouter({
       name: 'Post',
       component: Post,
       meta: {
-        title: 'Post',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -74,7 +74,7 @@ const router = createRouter({
       name: 'Post-p',
       component: Post,
       meta: {
-        title: 'Post',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -83,7 +83,7 @@ const router = createRouter({
       name: 'Lp',
       component: TopPage,
       meta: {
-        title: 'TopPage',
+        title: 'ままのいえ',
       }
     },
     {
@@ -91,7 +91,7 @@ const router = createRouter({
       name: 'Negative',
       component: Negative,
       meta: {
-        title: 'Negative',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -100,7 +100,7 @@ const router = createRouter({
       name: 'Positive',
       component: Positive,
       meta: {
-        title: 'Positive',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -109,7 +109,7 @@ const router = createRouter({
       name: 'Chat',
       component: Chat,
       meta: {
-        title: 'Chat',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },
@@ -118,7 +118,7 @@ const router = createRouter({
       name: 'Diagnose',
       component: Diagnose,
       meta: {
-        title: 'Diagnose',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     }, 
@@ -127,7 +127,7 @@ const router = createRouter({
       name: 'Diagnosehome',
       component: Diagnosehome,
       meta: {
-        title: 'Diagnosehoem',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     }, 
@@ -136,7 +136,7 @@ const router = createRouter({
       name: 'Search',
       component: Search,
       meta: {
-        title: 'Search',
+        title: 'ままのいえ',
         isRequiredAuth: true
       }
     },  
