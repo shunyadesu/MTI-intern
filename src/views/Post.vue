@@ -2,20 +2,23 @@
   <div>
     <Loading :isShow='isLoading' />
     <Message :isShow='message.isShow' :isError='message.isError' :message='message.text'/>
-    <div class='post'>
-      <div class="ui card" v-if="Object.keys(parentPost).length">
-        <div class="content">
-          <div class="header">
-            {{ parentPost.nickname }}
-            <a class="ui tag label mini right floated">{{ parentPost.genre }}</a>
-          </div>
-          <div class="meta">
-            {{ convertToLocaleString(parentPost.createdAt) }}
-          </div>
-          <div class="description">
-            {{ parentPost.context }}
-          </div>
+    <div class="ui card parent" v-if="Object.keys(parentPost).length">
+      <div class="content">
+        <div class="header">
+          {{ parentPost.nickname }}
+          <a class="ui tag label mini right floated">{{ parentPost.genre }}</a>
         </div>
+        <div class="meta">
+          {{ convertToLocaleString(parentPost.createdAt) }}
+        </div>
+        <div class="description">
+          {{ parentPost.context }}
+        </div>
+      </div>
+    </div>
+    <div class='post'>
+      <div class="btn-wrapper">
+          <div class="btn" :class="isValid ? '' : 'disabled'" @click="sendPost">送信</div>
       </div>
       <form>
         <div>
@@ -31,9 +34,6 @@
             <option class="option" value="愛情">愛情</option>
             <option class="option" value="愚痴">愚痴</option>
           </select>
-        </div>
-        <div class="btn-wrapper">
-          <div class="btn" :class="isValid ? '' : 'disabled'" @click="sendPost">送信</div>
         </div>
       </form>
     </div>
@@ -153,25 +153,27 @@ export default {
 }
 </script>
 <style scoped>
-.post{
+.post {
   background-color: #ffffff;
   width: 90%;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   text-align: left;
+}
+.parent.card {
+  margin-top: 20px;
 }
 
 .btn-wrapper{
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 20px;
+  text-align: right;
 }
 
 .btn {
@@ -194,11 +196,13 @@ export default {
   border: none;
   border-radius: 1em;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
 }
 
 .genre {
   margin-top: 1.5em;
   text-align: right;
+  margin-bottom: 10px;
 }
 
 .label {
@@ -207,7 +211,7 @@ export default {
 }
 .select {
   width: 40%;
-  height: 3em;
+  height: 2em;
   padding: 0.3em 1em;
   border: none;
   border-radius: 1em;

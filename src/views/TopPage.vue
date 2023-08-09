@@ -95,7 +95,7 @@ export default {
 /* このコンポーネントだけに適用するCSSはここに記述する */
 .button {
   text-align: right;
-  margin: 1em 0;
+  padding: 1em 0;
 }
 .button1 {
   padding: 0.5em 1em;

@@ -43,7 +43,7 @@
                 {{ convertToLocaleString(post.createdAt) }}
               </div>
               <div class="description">
-                {{ posts.context }}
+                {{ post.context }}
               </div>
             </div>
             <div class="extra content">
@@ -120,6 +120,10 @@ export default {
 </script>
 
 <style scoped>
+.ui.main.container {
+  margin-bottom: 30px;
+}
+
 .card {
   width: 100%;
 }
@@ -138,7 +142,8 @@ export default {
 
 .search-select {
   border: none;
-  height: 2.5em;
+  height: 2.2em;
+  padding: 0 0.5em;
   border-radius: 1em;
   border: solid 1px lightgray;
 }
