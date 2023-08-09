@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <Header v-if="$route.name !== 'TopPage'"/>
+    <Header v-if="$route.name !== 'Lp'"/>
     <main>
       <router-view />
     </main>
   </div>
+  <Plus v-if="!['Lp', 'Login'].includes($route.name)"/>
   <Footer />
 </template>
 <script>
@@ -12,12 +13,14 @@
 import { RouterView } from 'vue-router'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import Plus from '@/components/Plus.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Footer
+    Footer,
+    Plus
   },
   computed: {
     isMenuShow() {
